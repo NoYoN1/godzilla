@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="static/css/style.css">
+    <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+    <title>trade</title>
+</head>
+
+<body>
+    {{do_trade.txt_print_start}}<br>
+
+    {%for i in range(0,4) %}
+    {{do_trade.log}}<br>
+    {{do_trade}}
+    {%endfor%}
+    <br>
+    {{do_trade.txt_print_final}}
+    <h2>Trade chart</h2>
+    <div id="chart"></div>
+    <div id="chartPosition">
+        <div id="chart1"></div>
+        <div id="chart2"></div>
+        <div id="chart3"></div>
+    </div>
+    <div>
+
+        <script type=text/javascript src="{{url_for('static', filename='/js/chart.js') }}"></script>
+        <script type=text/javascript src="static/js/chart_a.js"></script>
+    </div>
+</body>
+
+</html>

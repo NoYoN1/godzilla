@@ -1,0 +1,23 @@
+body {
+  background-color: rgb(238, 187, 124);
+}
+
+#chartPosition {
+  width: 100%;
+  height: 350px;
+  align-items: center;
+  display: flex;
+}
+/*
+  #chartPosition div {
+    -ms-flex: 1; 
+    flex: 1;
+  */
+#chart1 {
+  margin-left: auto;
+  margin-right: auto;
+}
+#chart3 {
+  margin-left: auto;
+  margin-right: auto;
+}

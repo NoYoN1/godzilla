@@ -5,8 +5,8 @@
 from flask import Flask
 from flask import request
 from flask import render_template
-import web_data
-import do_trade
+# import web_data
+# import do_trade
 app = Flask(__name__)
 
 
@@ -31,26 +31,26 @@ def index():
 #         return "<h1>文字列は違います !</h1>"
 
 
-@app.route('/object', )
-def print_object_data():
-    # return str(web_data.p1.name) + " is " + str(web_data.p1.age) + " years old"
+# @app.route('/object', )
+# def print_object_data():
+#     # return str(web_data.p1.name) + " is " + str(web_data.p1.age) + " years old"
 
-    # for i in web_data.m:
-    #     return str(i.name)
+#     # for i in web_data.m:
+#     #     return str(i.name)
 
-    return render_template('object.html', web_data=web_data)
-
-
-@app.route('/trade', )
-def print_trade():
-
-    return render_template('trade.html', do_trade=do_trade)
+#     return render_template('object.html', web_data=web_data)
 
 
-@app.route('/test', )
-def print_test():
+# @app.route('/trade', )
+# def print_trade():
 
-    return render_template('test.html', do_trade=do_trade.aaa)
+#     return render_template('trade.html', do_trade=do_trade)
+
+
+# @app.route('/test', )
+# def print_test():
+
+#     return render_template('test.html', do_trade=do_trade.aaa)
 
     # return str(do_trade.aaa)
 

@@ -6,7 +6,7 @@ body {
 }
 header {
   /* background-image: url("../img/image/Header-Image.png"); */
-  background-color: #566573;
+  background-color: #5d706d;
   /* background-position: left 50%; */
   /* width: 100%;
   height: 50%;
@@ -26,6 +26,7 @@ header {
   transform: translate(-50%, -50%);
   color: white;
   font-size: 30px;
+  text-shadow: 1px 1px 2px #505050;
 }
 .mode {
   position: absolute;
@@ -39,7 +40,7 @@ a {
   color: aliceblue;
 }
 a:hover {
-  color: #566573;
+  color: #07bb0d;
   transition: 0.3s;
 }
 .top-menu {
@@ -54,42 +55,65 @@ a:hover {
 }
 /* ###############strategy################ */
 main {
-  background-color: #50779b;
-  height: 500px;
+  height: 1000px;
+  background-color: #d6d6d6;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
 }
 .section-strategy {
+  /* background-image: url("../img/image/white_bg.jpg"); */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  height: 500px;
+  background-color: #2888e2;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  height: 500px;
 }
-/* main top title */
+/* top title */
 .strategy-title {
   text-align: center;
-  padding-top: 20px;
-  color: white;
+  padding-top: 30px;
+  color: black;
   font-size: 50px;
   font-weight: bolder;
+  text-shadow: 1px 1px 2px #505050;
+}
+.row-flex {
+  display: flex;
+  flex-direction: row;
+  height: 80%;
 }
 .strategy-select-box {
   padding-top: 20px;
   padding-left: 70px;
+  /* text-align: center; */
+  width: 40%;
 }
 
+.strategy-image {
+  width: 60%;
+  text-align: center;
+  margin-top: 80px;
+}
+.strategy-text {
+  font-weight: bolder;
+  font-size: 30px;
+  text-shadow: 1px 1px 2px #505050;
+}
 /* ####################strategy result#################### */
-.strategy-result {
-  background-color: #3386d3;
+.section-chart {
   height: 500px;
+  background-color: #0d2841;
   background-position: center;
   background-repeat: no-repeat;
-
-  position: relative;
 }
 .section-chart {
+  /* background-color: #020b15; */
 }
 .chart-title {
   text-align: center;
@@ -102,11 +126,33 @@ main {
 /* ####################footer#################### */
 footer {
   background-color: #064177;
-  height: 250px;
+  height: 150px;
   background-position: center;
   background-repeat: no-repeat;
-
   position: relative;
+}
+footer a:link {
+  font-weight: normal;
+}
+footer a:hover {
+  color: #6ab7ff;
+}
+.footer-flex {
+  display: flex;
+  flex-wrap: wrap;
+  height: 120px;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  justify-content: space-between;
+}
+
+.footer-link {
+  display: flex;
+  gap: 1rem;
+}
+.footer-copyrigth {
+  color: #fff;
 }
 /* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
 

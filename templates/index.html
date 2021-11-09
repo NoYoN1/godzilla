@@ -1,67 +1,171 @@
+<!-- 
+    # 2021-10-10
+    # TUMUR UILS
+    # 卒業作品
+    #
+ -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
+
     <link rel="stylesheet" href="/static/css/style.css">
+    <script type=text/javascript src="/static/js/topMenu.js"></script>
+
+    <!-- chart start -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/data.js"></script>
+    <!-- chart end -->
+
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
     <title>Trade</title>
+
 </head>
 
 <body>
 
     <header id="header">
         <div class="mode">
-            <div><a href="http://" target="_blank" rel="noopener noreferrer">NORMAL MODE</a></div>
+            <div><a href="#">NORMAL MODE</a></div>
             <div style="color: aliceblue;"> &nbsp; &nbsp;/&nbsp;&nbsp;</div>
-            <div><a href="http://" target="_blank" rel="noopener noreferrer">EXPERT MODE</a></div>
+            <div><a href="#">EXPERT MODE</a></div>
         </div>
         <div class="top-title">
-            <h1>GODZILLA TRADE STRATEGY</h1>
+            <h1 class="display-3">GODZILLA TRADE STRATEGY</h1>
         </div>
-        <!-- ###################start top menu###################### -->
+        <!-- start top menu -->
         <div class="top-menu">
-            <div class="top-link"><a href="http://" target="_blank" rel="noopener noreferrer">STRATEGY</a></div>
-            <div class="top-link"><a href="http://" target="_blank" rel="noopener noreferrer">RISK MANAGEMENT</a></div>
-            <div class="top-link"><a href="http://" target="_blank" rel="noopener noreferrer">MARKETS</a></div>
-            <div class="top-link"><a href="http://" target="_blank" rel="noopener noreferrer">MENU2</a></div>
+            <div id="top-menu0" class="top-menu-style" onclick="topMenu(1)" onmouseover="topMenuText()"><a
+                    href="#strategy"> ストラテジー</a></div>
+            <div id="top-menu1" class="top-menu-style" onclick="topMenu(2)">RISK MANAGEMENT</div>
+            <div id="top-menu2" class="top-menu-style" onclick="topMenu(3)">MARKETS</div>
+            <div id="top-menu0" class="top-menu-style"><a href="http://127.0.0.1:5500/trade" target="_blank">
+                    ストラテジー</a></div>
         </div>
-        <!-- ###################end top menu###################### -->
+        <script>
+
+        </script>
+        <!-- end top menu -->
     </header>
     <main>
-        <div class="section-strategy">
-            <div class="strategy-title">STRATEGYS</div>
-            <div class="row-flex">
-                <!-- ###################start select box###################### -->
-                <div class="strategy-select-box">
-                    <form action="#">
-                        <div class="select-box">
-                            <label for="select-box1" class="label select-box1"><span class="label-desc">Choose
-                                    strategy</span>
-                            </label>
-                            <select id="select-box1" class="select">
-                                <option value="Choice 1">strategy 1</option>
-                                <option value="Choice 2">strategy 2</option>
-                                <option value="Choice 3">strategy 3</option>
-                            </select>
-                        </div>
-                    </form>
-                </div>
-                <div class="strategy-image">
-                    <img class="img-pos" src="/static/img/image/shinzo.png" width="80%" height="auto" alt="" srcset="">
-                    <p class="strategy-text">Enjoy trade strategies</p>
+        <div id="strategy" class="strategy">
 
+            <div class="section-strategy">
+                <div class="strategy-title">STRATEGY</div>
+                <div class="row-flex">
+                    <!-- start select box -->
+                    <div class="strategy-select-box ">
+                        <form action="#">
+                            <div class="select-box">
+                                <label for="select-box1" class="label select-box1"><span class="label-desc">Choose
+                                        strategy</span>
+                                </label>
+                                <select id="select-box1" class="select">
+                                    <option value="Choice 1">strategy 1</option>
+                                    <option value="Choice 2">strategy 2</option>
+                                    <option value="Choice 3">strategy 3</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- end select box -->
+
+                    <div class="strategy-image">
+                        <img class="img-pos" src="/static/img/image/shinzo.png" width="80%" height="auto" alt=""
+                            srcset="">
+                        <p class="strategy-text">Enjoy trade strategies</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <!-- ####################end select box##################### -->
 
-        <!-- ####################strategy chart start##################### -->
-        <div class="section-chart">
-            <div class="chart-title">YOUR STRATEGY RESULT</div>
-            <div class="chart-result"></div>
+            <!-- strategy chart start -->
+            <div class="section-chart">
+                <div class="chart-title">YOUR STRATEGY RESULT</div>
+                <div class="chart-result"></div>
+            </div>
+            <!-- strategy chart end -->
         </div>
-        <!-- ####################strategy chart end##################### -->
+
+
+        <!-- risk management start  -->
+        <div id="risk-management" class="risk-management">
+            <div>
+                <h2 class="risk-title">RISK MANAGEMENT</h2>
+            </div>
+            <figure class="highcharts-figure">
+                <div id="container"></div>
+                <p class="highcharts-description">
+                    This demo shows how related charts can be synchronized. Hover
+                    over one chart to see the effect in the other charts as well.
+                    This is a technique that is commonly seen in dashboards,
+                    where multiple charts are often used to visualize related
+                    information.
+                </p>
+            </figure>
+            <!-- start insert value -->
+            <div>
+                <form action="/post" method="post">
+                    <div class="risk-manage-labels">
+                        <label for="initialCash" class="risk-manage-labels-left">Initial cash: </label>
+                        <input type="text" id="initialCash" name="initialCash" placeholder="">
+                    </div>
+                    <br>
+                    <div class="risk-manage-labels">
+                        <label for="tradesRequired" class="risk-manage-labels-left">Trades required: </label>
+                        <input type="text" id="tradesRequired" name="tradesRequired" placeholder="">
+                    </div>
+                    <br>
+                    <div class="risk-manage-labels">
+                        <label for="riskperTrade" class="risk-manage-labels-left">Risk per Trade: </label>
+                        <input type="text" id="riskperTrade" name="riskperTrade" placeholder="">
+                    </div>
+                    <br>
+                    <div class="risk-manage-labels">
+                        <label for="profitRatio" class="risk-manage-labels-left">Profit Ratio: </label>
+                        <input type="text" id="profitRatio" name="profitRatio" placeholder="">
+                    </div>
+                    <br>
+                    <div class="risk-manage-labels">
+                        <label for="winRatio" class="risk-manage-labels-left">Win Ratio(%): </label>
+                        <input type="text" id="winRatio" name="winRatio" placeholder="">
+                    </div>
+                    <br>
+
+                    <button type="button">send</button>
+                </form>
+            </div>
+            <!-- end insert value -->
+            <div class="container mt-3">
+                <h2>Data List</h2>
+                <form action="/action_page.php">
+                    <label for="browser" class="form-label">Choose your browser from the list:</label>
+                    <input class="form-control" list="browsers" name="browser" id="browser">
+                    <datalist id="browsers">
+                        <option value="Edge">
+                        <option value="Firefox">
+                        <option value="Chrome">
+                        <option value="Opera">
+                        <option value="Safari">
+                    </datalist>
+                    <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                </form>
+            </div>
+        </div>
+        <!--  risk management end  -->
+
+        <!--  margets start  -->
+        <div id="margets" class="margets">
+            <div>
+                <h2>MARKETS</h2>
+            </div>
+        </div>
+        <!--  margets end  -->
     </main>
+
+
+
     <footer>
         <div class="footer-flex">
             <div class="footer-link">
@@ -73,8 +177,9 @@
             <div class="footer-copyrigth">Copyright ©2021</div>
         </div>
     </footer>
-
+    <script type=text/javascript src="/static/js/highcharts.js"></script>
 </body>
+
 
 
 </html>

@@ -1,7 +1,7 @@
 import datetime
 import backtrader as bt
 
-from strategies import TestStrategy
+from Simple_strategy import TestStrategy
 
 cerebro = bt.Cerebro()
 cerebro.broker.setcash(10000)
@@ -10,9 +10,9 @@ cerebro.broker.setcash(10000)
 data = bt.feeds.YahooFinanceCSVData(
     dataname="AAPL.csv",
     # Do not pass values before this date
-    fromdate=datetime.datetime(2021, 8, 1),
+    fromdate=datetime.datetime(2021, 1, 1),
     # Do not pass values after this date
-    todate=datetime.datetime(2021, 9, 10),
+    todate=datetime.datetime(2021, 10, 10),
     reverse=False)
 
 cerebro.adddata(data)

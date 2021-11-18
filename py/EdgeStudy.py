@@ -131,7 +131,7 @@ class Simulate:
         self.printFinal()
         plt.plot(self.tradeIndex, self.money,)
         plt.ylabel('Money')
-        plt.show()
+        # plt.show()
 
     def multiple(self, Initial_cash):
         global portfolioIndex

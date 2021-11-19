@@ -78,9 +78,11 @@ class Simulate:
         print('Profit Ratio     : %.f' % self.profitRatio + ':1')
         print('Win Rate         : %.f' % self.winRate + '%')
 
-    def printFinal(self):
+    def printFinal(self,):
         print(Fore.RESET)
+
         print('Final Cash  : $%.2f' % self.cash)
+
         print('Gross Profit: $%.f' % self.grossProfit)
         print('Gross Loss  : $%.f' % self.grossLoss)
         print('PnL Net     : %.2f' % self.pnlNet + '%')
@@ -95,6 +97,7 @@ class Simulate:
         print('Max All Time High: $%.f || Max All time Low: $%.2f' %
               (self.ATHigh, self.ATLow))
         print('Max ATLOWPOS: %.f' % self.ATLowPos)
+        return self.cash, self.grossProfit, self.pnlNet, self.strikeRate, self.win, self.loss, self.winStreak, self.lossStreak, self.maxDrawdown, self.maxDDPeakPos, self.maxDDLowPos, self.ATHigh, self.ATLow, self.ATLowPos
 
     def trade(self, i):
         dice = random.randint(1, 100)

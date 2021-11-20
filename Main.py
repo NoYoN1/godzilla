@@ -51,7 +51,7 @@ def index():
 #     return (render_template('/risk/risk.html'))
 
 
-@app.route('/#risk-management', methods=["GET", "POST"])
+@app.route('/risk-management', methods=["GET", "POST"])
 def riskmanagement():
     if request.method == "POST":
         # getting input with name = initialCash in HTML form
@@ -72,8 +72,10 @@ def riskmanagement():
         # result.printFinal()
         final_result = result.printFinal()
         # return result
-    return (render_template('/risk/risk.html', initialCash=initialCash, tradesRequired=tradesRequired, riskPerTrade=riskPerTrade, profitRatio=profitRatio, winRatio=winRatio, final_result=final_result))
+        chart = result.printTrade(1)
 
+        return (render_template('/risk/risk.html', initialCash=initialCash, tradesRequired=tradesRequired, riskPerTrade=riskPerTrade, profitRatio=profitRatio, winRatio=winRatio, final_result=final_result, chart=chart))
+    return render_template('/index.html',)
 
 # labels = [
 #     'JAN', 'FEB', 'MAR', 'APR',
@@ -98,7 +100,6 @@ def riskmanagement():
 #     bar_labels = labels
 #     bar_values = values
 #     return render_template('bar_chart.html', title='Bitcoin Monthly Price in USD', max=17000, labels=bar_labels, values=bar_values)
-
 
 if __name__ == '__main__':
     app.run(host="127.0.0.1", port=5550, debug=True)

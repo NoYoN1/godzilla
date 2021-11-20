@@ -26,7 +26,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100%;
+
   /* position: relative; */
 
   /* width: 100%; */
@@ -88,6 +88,10 @@ button:hover .circle .icon.arrow {
 .risk-management-flex {
   display: flex;
   width: 100%;
+  height: 900px;
+}
+.risk-management-left-top-margin {
+  margin-top: -16px;
 }
 .risk-management-left {
   /* position: absolute; */
@@ -103,8 +107,9 @@ button:hover .circle .icon.arrow {
 .risk-management-right-top {
   display: flex;
   justify-content: space-between;
-  margin-left: 20px;
-  margin-right: 20px;
+
+  margin-left: 10px;
+  margin-right: 10px;
 }
 .icon-flex {
   display: flex;
@@ -116,9 +121,14 @@ button:hover .circle .icon.arrow {
   height: 30px;
 }
 .risk-management-right-0 {
-  width: 150px;
-  height: 100px;
+  width: 25%;
+  height: auto;
   /* background-color: aqua; */
+}
+.risk-management-right-00 {
+  width: 40%;
+  height: auto;
+  margin-top: 10px;
 }
 .risk-management-right-1 {
   width: 150px;
@@ -153,6 +163,11 @@ button:hover .circle .icon.arrow {
   align-items: center;
   font-size: 30px;
 }
+.risk-management-result-menu-bottom {
+  text-align: center;
+  align-items: center;
+  font-size: 25px;
+}
 .risk-management-result-title {
   color: #646464;
   text-align: left;
@@ -164,7 +179,7 @@ button:hover .circle .icon.arrow {
 .risk-management-result-chart {
   margin: auto;
   width: 95%;
-  height: 50%;
+  height: 40%;
   background-color: #808080;
 }
 .icon {
@@ -175,4 +190,11 @@ button:hover .circle .icon.arrow {
 }
 .space {
   margin-top: 30px;
+}
+.result-bottom-left {
+  display: flex;
+  justify-content: space-between;
+}
+.sub-left {
+  width: 50%;
 }

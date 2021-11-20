@@ -69,6 +69,7 @@ class Simulate:
         else:
             print(Fore.RED + 'Trade %.0f = $%.2f || $%.2f ' %
                   (self.trades, self.money[i], self.positionChange,))
+        return(self.money)
 
     def printSetup(self, Initial_cash):
         print(Fore.CYAN)
@@ -79,25 +80,23 @@ class Simulate:
         print('Win Rate         : %.f' % self.winRate + '%')
 
     def printFinal(self,):
-        print(Fore.RESET)
-
-        print('Final Cash  : $%.2f' % self.cash)
-
-        print('Gross Profit: $%.f' % self.grossProfit)
-        print('Gross Loss  : $%.f' % self.grossLoss)
-        print('PnL Net     : %.2f' % self.pnlNet + '%')
-        print('Strike Rate : %.1f' % self.strikeRate)
-        print('Win         : %.f ||   Loss         : %.f' %
-              (self.win, self.loss))
-        print('Win Streak  : %.f   ||   Loss Streak  : %.f' %
-              (self.winStreak, self.lossStreak))
-        print('Max Drawdown: %.3f' % self.maxDrawdown + '%')
-        print('Max Drawdown Peak: %.f || Max Drawdown Low: %.f' %
-              (self.maxDDPeakPos, self.maxDDLowPos))
-        print('Max All Time High: $%.f || Max All time Low: $%.2f' %
-              (self.ATHigh, self.ATLow))
-        print('Max ATLOWPOS: %.f' % self.ATLowPos)
-        return self.cash, self.grossProfit, self.pnlNet, self.strikeRate, self.win, self.loss, self.winStreak, self.lossStreak, self.maxDrawdown, self.maxDDPeakPos, self.maxDDLowPos, self.ATHigh, self.ATLow, self.ATLowPos
+        # print(Fore.RESET)
+        # print('Final Cash  : $%.2f' % self.cash)
+        # print('Gross Profit: $%.f' % self.grossProfit)
+        # print('Gross Loss  : $%.f' % self.grossLoss)
+        # print('PnL Net     : %.2f' % self.pnlNet + '%')
+        # print('Strike Rate : %.1f' % self.strikeRate)
+        # print('Win         : %.f ||   Loss         : %.f' %
+        #       (self.win, self.loss))
+        # print('Win Streak  : %.f   ||   Loss Streak  : %.f' %
+        #       (self.winStreak, self.lossStreak))
+        # print('Max Drawdown: %.3f' % self.maxDrawdown + '%')
+        # print('Max Drawdown Peak: %.f || Max Drawdown Low: %.f' %
+        #       (self.maxDDPeakPos, self.maxDDLowPos))
+        # print('Max All Time High: $%.f || Max All time Low: $%.2f' %
+        #       (self.ATHigh, self.ATLow))
+        # print('Max ATLOWPOS: %.f' % self.ATLowPos)
+        return self.cash, self.grossProfit, self.grossLoss, self.pnlNet, self.strikeRate, self.win, self.loss, self.winStreak, self.lossStreak, self.maxDrawdown, self.maxDDPeakPos, self.maxDDLowPos, self.ATHigh, self.ATLow, self.ATLowPos
 
     def trade(self, i):
         dice = random.randint(1, 100)
@@ -125,15 +124,15 @@ class Simulate:
         #         self.printTrade(i)
 
     def next(self, Initial_cash):
-        print(f"Starting Cash: ${Initial_cash}")
-        print()
+        # print(f"Starting Cash: ${Initial_cash}")
+        # print()
         while self.trades < self.tradesRequired:
             self.trade(self.trades)
 
-        self.printSetup(Initial_cash)
-        self.printFinal()
-        plt.plot(self.tradeIndex, self.money,)
-        plt.ylabel('Money')
+        # self.printSetup(Initial_cash)
+        # self.printFinal()
+        # plt.plot(self.tradeIndex, self.money,)
+        # plt.ylabel('Money')
         # plt.show()
 
     def multiple(self, Initial_cash):
@@ -141,14 +140,14 @@ class Simulate:
         portfolioIndex = []
         self.printSetup(Initial_cash)
         print(Fore.RESET)
-        for i in range(1, 10):
+        for i in range(0, 10):
             self.__init__()
             self.printTradeTrue = False
             while self.trades < self.tradesRequired:
                 self.trade(self.trades)
             portfolioIndex.append(self.money)
             print('Final Cash #%.f  : $%.2f || PnL Net: %.2f || Strike Rate: %.1f || MAX DD: %.2f' %
-                  (i, self.cash, self.pnlNet, self.strikeRate, self.maxDrawdown))
+                  (i + 1, self.cash, self.pnlNet, self.strikeRate, self.maxDrawdown))
             plt.plot(self.tradeIndex, portfolioIndex[i-1], )
 
         # plt.ylabel('Money')

@@ -69,7 +69,7 @@ class Simulate:
         else:
             print(Fore.RED + 'Trade %.0f = $%.2f || $%.2f ' %
                   (self.trades, self.money[i], self.positionChange,))
-        return(self.money)
+        return(self.trades, self.money)
 
     def printSetup(self, Initial_cash):
         print(Fore.CYAN)
@@ -119,9 +119,9 @@ class Simulate:
         self.tradeIndex.append(i)
         self.basicAnalyzer(i)
 
-        # if self.printTradeTrue:
-        #     if self.printTradeTrue:
-        #         self.printTrade(i)
+        if self.printTradeTrue:
+            if self.printTradeTrue:
+                self.printTrade(i)
 
     def next(self, Initial_cash):
         # print(f"Starting Cash: ${Initial_cash}")

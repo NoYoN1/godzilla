@@ -1,10 +1,8 @@
-const myChart = new Chart(document.getElementById("myChart"), config);
-const config = {
-  type: "line",
-  data: data,
-  options: {},
-};
-const labels = ["January", "February", "March", "April", "May", "June", "july"];
+function ch(chartData) {
+  console.log("daragdlaa");
+  console.log(chartData);
+}
+const labels = ["January", "February", "March", "April", "May", "June"];
 const data = {
   labels: labels,
   datasets: [
@@ -12,7 +10,14 @@ const data = {
       label: "My First dataset",
       backgroundColor: "rgb(255, 99, 132)",
       borderColor: "rgb(255, 99, 132)",
-      data: [0, 10, 5, 2, 20, 30, 23],
+      data: [0, 10, 5, 2, 20, 30, 45],
     },
   ],
 };
+
+const config = {
+  type: "line",
+  data: data,
+  options: {},
+};
+var myChart = new Chart(document.getElementById("myChart"), config);

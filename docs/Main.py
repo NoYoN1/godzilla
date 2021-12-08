@@ -106,4 +106,4 @@ def trade_html():
 
 
 if __name__ == '__main__':
-    app.run(host="127.0.0.1", port=5550, debug=True)
+    app.run(host="https://noyon1.github.io/godzilla/docs", port=5550, debug=True)

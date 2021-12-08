@@ -20,6 +20,7 @@ function topMenu(page) {
       break;
   }
 }
+
 // top menu text
 function topMenuText() {
   if (document.getElementById("top-menu0").innerHTML === "ストラテジー") {

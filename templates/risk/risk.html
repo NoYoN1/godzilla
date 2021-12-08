@@ -83,7 +83,22 @@
                             <div id="winRatio" class="form-text">Recommendation range 40 - 60%. Percentage. Win
                                 Ratio, 50 = 50% win rate</div>
                         </div>
-                        <button type="submit" class="my-btn btn btn-success mt-3" onclick=ch()>Submit</button>
+                        <div class="mb-3">
+                            <label for="dataRequired" class=" form-label">Data required:</label>
+                            <select class="form-select" id="dataRequired" name="dataRequired">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                                <option>9</option>
+                                <option>10</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="my-btn btn btn-success mt-3" onclick="multi()">Submit</button>
                         <br>
                         <br>
                     </form>
@@ -127,132 +142,131 @@
                     </div>
                 </div>
                 <!-- chart start -->
-
                 <div class="risk-management-result-chart">
                     <!-- {{chart}}  -->
-
-                    <iframe width="100%" height="435" src="http://127.0.0.1:5550/chart" frameborder="0"></iframe>
-
-
+                    <iframe width="100%" height="435" src="http://127.0.0.1:5550/chart" title="Chart"></iframe>
                 </div>
 
                 <!-- chart end -->
                 <div class="space"></div>
                 <!-- bottom result start -->
-                <div class="risk-management-right-top">
-                    <div class="risk-management-right-0">
-                        <div class="risk-management-result-title-bottom">FINAL CASH</div>
-                        <div class="risk-management-result-menu-bottom bi bi-currency-exchange">&nbsp;{{'%.2f'
-                            %final_result[0]}}</div>
-                    </div>
-                    <div class="risk-management-right-0">
-                        <div class="risk-management-result-title-bottom">ALL TIME HIGH</div>
-                        <div class="risk-management-result-menu-bottom bi bi-currency-exchange">&nbsp;{{'%.2f'
-                            %final_result[12]}}</div>
-                    </div>
-                    <div class="risk-management-right-0">
-                        <div class="risk-management-result-title-bottom">ALL TIME LOW</div>
-                        <div class="risk-management-result-menu-bottom bi bi-currency-exchange">&nbsp;{{'%.2f'
-                            %final_result[13]}}</div>
-                    </div>
-                    <div class="risk-management-right-0">
-                        <div class="risk-management-result-title-bottom">PNL NET</div>
-                        <div class="icon-flex">
+                <div id="bottomR">
+                    <div class="risk-management-right-top">
+                        <div class="risk-management-right-0">
+                            <div class="risk-management-result-title-bottom">FINAL CASH</div>
+                            <div class="risk-management-result-menu-bottom bi bi-currency-exchange">&nbsp;{{'%.2f'
+                                %final_result[0]}}</div>
+                        </div>
+                        <div class="risk-management-right-0">
+                            <div class="risk-management-result-title-bottom">ALL TIME HIGH</div>
+                            <div class="risk-management-result-menu-bottom bi bi-currency-exchange">&nbsp;{{'%.2f'
+                                %final_result[12]}}</div>
+                        </div>
+                        <div class="risk-management-right-0">
+                            <div class="risk-management-result-title-bottom">ALL TIME LOW</div>
+                            <div class="risk-management-result-menu-bottom bi bi-currency-exchange">&nbsp;{{'%.2f'
+                                %final_result[13]}}</div>
+                        </div>
+                        <div class="risk-management-right-0">
+                            <div class="risk-management-result-title-bottom">PNL NET</div>
+                            <div class="icon-flex">
+                                <div class="risk-management-result-menu-bottom">{{'%.2f'
+                                    %final_result[3]}}&nbsp;</div>
+                                <div><img src="/static/img/image/risk/percent1.png" alt="" class="icon-size"></div>
+                            </div>
+                        </div>
+                        <div class="risk-management-right-0">
+                            <div class="risk-management-result-title-bottom">STRIKE RATE</div>
                             <div class="risk-management-result-menu-bottom">{{'%.2f'
-                                %final_result[3]}}&nbsp;</div>
-                            <div><img src="/static/img/image/risk/percent1.png" alt="" class="icon-size"></div>
+                                %final_result[4]}}</div>
                         </div>
                     </div>
-                    <div class="risk-management-right-0">
-                        <div class="risk-management-result-title-bottom">STRIKE RATE</div>
-                        <div class="risk-management-result-menu-bottom">{{'%.2f'
-                            %final_result[4]}}</div>
-                    </div>
-                </div>
-                <div class="risk-management-right-top">
-                    <div class="risk-management-right-00">
-                        <div class="result-bottom-left">
-                            <div class="sub-left">
-                                <div class="result-bottom risk-management-result-title-bottom">WIN</div>
-                                <div class="risk-management-result-menu-bottom1">{{'%.2f'
-                                    %final_result[5]}}</div>
+                    <div class="risk-management-right-top">
+                        <div class="risk-management-right-00">
+                            <div class="result-bottom-left">
+                                <div class="sub-left">
+                                    <div class="result-bottom risk-management-result-title-bottom">WIN</div>
+                                    <div class="risk-management-result-menu-bottom1">{{'%.2f'
+                                        %final_result[5]}}</div>
+                                </div>
+                                <div class="sub-left">
+                                    <div class="result-bottom risk-management-result-title-bottom">LOSS</div>
+                                    <div class="risk-management-result-menu-bottom1">{{'%.2f'
+                                        %final_result[6]}}</div>
+                                </div>
                             </div>
-                            <div class="sub-left">
-                                <div class="result-bottom risk-management-result-title-bottom">LOSS</div>
-                                <div class="risk-management-result-menu-bottom1">{{'%.2f'
-                                    %final_result[6]}}</div>
-                            </div>
-                        </div>
-                        <div class="result-bottom-left">
-                            <div class="sub-left">
-                                <div class="result-bottom risk-management-result-title-bottom">Win streak</div>
-                                <div class="risk-management-result-menu-bottom1">{{'%.2f'
-                                    %final_result[7]}}</div>
-                            </div>
-                            <div class="sub-left">
-                                <div class="result-bottom risk-management-result-title-bottom">Loss streak</div>
-                                <div class="risk-management-result-menu-bottom1">{{'%.2f'
-                                    %final_result[8]}}</div>
+                            <div class="result-bottom-left">
+                                <div class="sub-left">
+                                    <div class="result-bottom risk-management-result-title-bottom">Win streak</div>
+                                    <div class="risk-management-result-menu-bottom1">{{'%.2f'
+                                        %final_result[7]}}</div>
+                                </div>
+                                <div class="sub-left">
+                                    <div class="result-bottom risk-management-result-title-bottom">Loss streak</div>
+                                    <div class="risk-management-result-menu-bottom1">{{'%.2f'
+                                        %final_result[8]}}</div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="risk-management-right-00">
-                        <div class="result-bottom-left">
-                            <div class="sub-left">
-                                <div class="result-bottom risk-management-result-title-bottom">Gross profit</div>
-                                <div class="risk-management-result-menu-bottom1">{{'%.2f'
-                                    %final_result[1]}}</div>
+                        <div class="risk-management-right-00">
+                            <div class="result-bottom-left">
+                                <div class="sub-left">
+                                    <div class="result-bottom risk-management-result-title-bottom">Gross profit</div>
+                                    <div class="risk-management-result-menu-bottom1">{{'%.2f'
+                                        %final_result[1]}}</div>
+                                </div>
+                                <div class="sub-left">
+                                    <div class="result-bottom risk-management-result-title-bottom">Gross loss</div>
+                                    <div class="risk-management-result-menu-bottom1">{{'%.2f'
+                                        %final_result[2]}}</div>
+                                </div>
                             </div>
-                            <div class="sub-left">
-                                <div class="result-bottom risk-management-result-title-bottom">Gross loss</div>
-                                <div class="risk-management-result-menu-bottom1">{{'%.2f'
-                                    %final_result[2]}}</div>
+                            <div class="result-bottom-left">
+                                <div class="sub-left">
+                                    <div class="result-bottom risk-management-result-title-bottom">Max drawdown peak
+                                    </div>
+                                    <div class="risk-management-result-menu-bottom1">{{'%.2f'
+                                        %final_result[10]}}</div>
+                                </div>
+                                <div class="sub-left">
+                                    <div class="result-bottom risk-management-result-title-bottom">Max drawdown low
+                                    </div>
+                                    <div class="risk-management-result-menu-bottom1">{{'%.2f'
+                                        %final_result[11]}}</div>
+                                </div>
                             </div>
                         </div>
-                        <div class="result-bottom-left">
-                            <div class="sub-left">
-                                <div class="result-bottom risk-management-result-title-bottom">Max drawdown peak</div>
-                                <div class="risk-management-result-menu-bottom1">{{'%.2f'
-                                    %final_result[10]}}</div>
-                            </div>
-                            <div class="sub-left">
-                                <div class="result-bottom risk-management-result-title-bottom">Max drawdown low</div>
-                                <div class="risk-management-result-menu-bottom1">{{'%.2f'
-                                    %final_result[11]}}</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="risk-management-right-0">
-                        <div class="risk-management-result-title-bottom">Max drawdown</div>
-                        <div class="risk-management-result-menu-bottom1">{{'%.2f'
-                            %final_result[9]}}</div>
+                        <div class="risk-management-right-0">
+                            <div class="risk-management-result-title-bottom">Max drawdown</div>
+                            <div class="risk-management-result-menu-bottom1">{{'%.2f'
+                                %final_result[9]}}</div>
 
-                        <div class="risk-management-result-title-bottom">Max atlowpos</div>
-                        <div class="risk-management-result-menu-bottom1">{{'%.2f'
-                            %final_result[14]}}&nbsp;<img src="/static/img/image/risk/percent1.png" alt=""
-                                class="icon-size"></div>
+                            <div class="risk-management-result-title-bottom">Max atlowpos</div>
+                            <div class="risk-management-result-menu-bottom1">{{'%.2f'
+                                %final_result[14]}}&nbsp;<img src="/static/img/image/risk/percent1.png" alt=""
+                                    class="icon-size"></div>
+                        </div>
                     </div>
                 </div>
                 <!-- bottom result end -->
+                <!-- bottom multi start -->
+                <div id="multi" style="margin-left: 60px;">
+                    {% for i in range(0, 10) %}
+
+                    {% endfor %}
+                    {{dataMulti1}}
+                    {{mm}}
+
+                </div>
+                <!-- bottom multi end -->
             </div>
             <!-- top result and right end -->
-
         </div>
         <!--  RISK MANAGEMENT END  -->
-        {{chart}}
-        {{len1}}
+        <!-- {{chartData}} -->
 
-        {%for i in range(0, tradesRequired)%}
-
-        <li>{{chart[i]}}</li>
-
-        {%endfor%}
         <br>
-        {{chart[1]}}
-        <br>
-        {%for i in range(0, tradesRequired)%}
-        {{i+1}}
-        {%endfor%}
+
     </div>
 </body>
 

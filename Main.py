@@ -63,11 +63,10 @@ def riskmanagement():
         # get single data
         chartData = result.printTrade(0)[1]
         # get multi data result
-        dataMulti1 = [*range(1, 10, 1)]
 
-        mm = [*range(1, 6, 1)]
-        for m in range(1, 5):
-            mm[m] = getMultiChartData[m]
+        # mm = [*range(1, 6, 1)]
+        # for m in range(1, 5):
+        #     mm = getMultiChartData
 
         # get multi data
         dataMulti = {}
@@ -89,7 +88,7 @@ def riskmanagement():
         # file.write(js)
         # file.close()
 
-        return (render_template('/risk/risk.html', title=title, initialCash=initialCash, tradesRequired=tradesRequired, riskPerTrade=riskPerTrade, profitRatio=profitRatio, winRatio=winRatio, final_result=final_result, chartData=chartData, mm=mm, dataMulti1=dataMulti1))
+        return (render_template('/risk/risk.html', title=title, initialCash=initialCash, tradesRequired=tradesRequired, riskPerTrade=riskPerTrade, profitRatio=profitRatio, winRatio=winRatio, final_result=final_result, chartData=chartData))
     return render_template('/index.html',)
 
 

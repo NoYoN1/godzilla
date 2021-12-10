@@ -119,8 +119,8 @@ class Simulate:
         self.tradeIndex.append(i)
         self.basicAnalyzer(i)
 
-        if self.printTradeTrue:
-            self.printTrade(i)
+        # if self.printTradeTrue:
+        #     self.printTrade(i)
 
     # def next(self, Initial_cash):
     #     # print(f"Starting Cash: ${Initial_cash}")

@@ -204,3 +204,9 @@ button:hover .circle .icon.arrow {
 .sub-left {
   width: 50%;
 }
+.resertValue:hover {
+  cursor: pointer;
+}
+.aaa {
+  margin-top: 10px;
+}

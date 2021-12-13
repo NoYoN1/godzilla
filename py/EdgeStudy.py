@@ -143,7 +143,7 @@ class Simulate:
         pnlR = []
         strikeR = []
         maxR = []
-        self.printSetup(initialCash)
+        # self.printSetup(initialCash)
         print(Fore.RESET)
         for i in range(0, 10):
             self.__init__(initialCash, tradesRequired,
@@ -152,18 +152,17 @@ class Simulate:
             while self.trades < self.tradesRequired:
                 self.trade(self.trades)
             portfolioIndex.append(self.money)
-            print('Final Cash #%.f  : $%.2f || PnL Net: %.2f || Strike Rate: %.1f || MAX DD: %.2f' %
-                  (i + 1, self.cash, self.pnlNet, self.strikeRate, self.maxDrawdown))
+            # print('Final Cash #%.f  : $%.2f || PnL Net: %.2f || Strike Rate: %.1f || MAX DD: %.2f' %
+            #       (i + 1, self.cash, self.pnlNet, self.strikeRate, self.maxDrawdown))
             plt.plot(self.tradeIndex, portfolioIndex[i], )
             multi.append(portfolioIndex[i])
             cashR.append(self.cash)
             pnlR.append(self.pnlNet)
             strikeR.append(self.strikeRate)
             maxR.append(self.maxDrawdown)
-        return (multi, cashR, pnlR, strikeR, maxR)
-
         # plt.ylabel('Money')
         # plt.show()
+        return (multi, cashR, pnlR, strikeR, maxR)
 
     def basicAnalyzer(self, i):
         # Gross Profit / Loss

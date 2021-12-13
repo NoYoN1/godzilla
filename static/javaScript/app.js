@@ -29,3 +29,8 @@ function topMenuText() {
     document.getElementById("top-menu0").innerHTML = "ストラテジー";
   }
 }
+
+function riskResetValue() {
+  var initialCash = document.getElementById("initialCash");
+  initialCash.innerHTML.valueOf = "1000";
+}

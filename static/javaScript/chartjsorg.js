@@ -72,8 +72,11 @@ async function load() {
 
   //#########//
   var hide = document.getElementById("bottomR");
+  var multi = document.getElementById("multi");
   if (dataNumber !== 1) {
     hide.style.display = "none";
+  } else {
+    multi.style.display = "none";
   }
   //#########//
 }

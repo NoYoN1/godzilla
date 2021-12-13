@@ -62,33 +62,37 @@ def riskmanagement():
         final_result = result.printFinal()
         # get single data
         chartData = result.printTrade(0)[1]
-        # get multi data result
 
+        # get multi data result
         # mm = [*range(1, 6, 1)]
         # for m in range(1, 5):
-        #     mm = getMultiChartData
+        finalCashMulti = getMultiChartData[1]
+        fnLNetMulti = getMultiChartData[2]
+        StrikeRateMulti = getMultiChartData[3]
+        finalMaxDDMulti = getMultiChartData[4]
 
-        # get multi data
-        dataMulti = {}
-        for k in range(dataRequired):
-            for v in getMultiChartData[0]:
-                dataMulti[k] = v
-                getMultiChartData[0].remove(v)
-                break
-        jsMulti = json.dumps(dataMulti)
-        file = open('static/json/chartMulti.json', 'w')
-        file.write(jsMulti)
-        file.close()
+        if 1 != dataRequired:
+            # get multi data
+            dataMulti = {}
+            for k in range(dataRequired):
+                for v in getMultiChartData[0]:
+                    dataMulti[k] = v
+                    getMultiChartData[0].remove(v)
+                    break
+            jsMulti = json.dumps(dataMulti)
+            file = open('static/json/chartMulti.json', 'w')
+            file.write(jsMulti)
+            file.close()
+        else:
+            data = []
+            for i in range(1):
+                data = {i: chartData, }
+            js = json.dumps(data)
+            file = open('static/json/chartMulti.json', 'w')
+            file.write(js)
+            file.close()
 
-        # data = []
-        # for i in range(1):
-        #     data = {i: chartData, }
-        # js = json.dumps(data)
-        # file = open('static/json/chart.json', 'w')
-        # file.write(js)
-        # file.close()
-
-        return (render_template('/risk/risk.html', title=title, initialCash=initialCash, tradesRequired=tradesRequired, riskPerTrade=riskPerTrade, profitRatio=profitRatio, winRatio=winRatio, final_result=final_result, chartData=chartData))
+        return (render_template('/risk/risk.html', title=title, initialCash=initialCash, tradesRequired=tradesRequired, riskPerTrade=riskPerTrade, profitRatio=profitRatio, winRatio=winRatio, final_result=final_result, chartData=chartData, dataRequired=dataRequired, finalCashMulti=finalCashMulti, finalMaxDDMulti=finalMaxDDMulti, fnLNetMulti=fnLNetMulti, StrikeRateMulti=StrikeRateMulti))
     return render_template('/index.html',)
 
 

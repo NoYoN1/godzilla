@@ -71,12 +71,11 @@ async function load() {
   myChart = new Chart(document.getElementById("myChart"), config);
 
   //#########//
-  var hide = document.getElementById("bottomR");
+  var single = document.getElementById("bottomResult");
   var multi = document.getElementById("multi");
   if (dataNumber !== 1) {
-    hide.style.display = "none";
-  } else {
-    multi.style.display = "none";
+    multi.style.display = "block";
+    single.style.display = "none";
   }
   //#########//
 }

@@ -42,10 +42,16 @@
             <div class="risk-management-left risk-management-left-top-margin">
                 <!-- start insert value -->
                 <div class="container  mt-3 ">
+                    <div id="resertValue" class="form-text resertValue" onclick="riskResetValue()">Reset
+                        Value
+                        値をリセットする
+                    </div>
                     <form action="{{url_for('riskmanagement')}}" method="post">
                         <div class=" mb-3">
                             <label for="initialCash" class="form-label  ">Initial
-                                cash:<span class="form-text">初期金</span></label>
+                                cash:<span class="form-text">初期金</span>
+
+                            </label>
                             <input class="form-control" id="initialCash" name="initialCash"
                                 aria-describedby="initialCash" value="{{initialCash}}">
                             <div id="initialCash" class="form-text">Recommendation range 100-10000 $.</div>
@@ -100,8 +106,7 @@
                                 <option>10</option>
                             </select>
                         </div>
-                        <div id="resertValue" class="form-text resertValue" onclick="topMenuText()">Reset Value 値をリセットする
-                        </div>
+
                         <button type="submit" class="my-btn btn btn-success mt-3" onclick="multi()">Submit</button>
                         <br>
                         <br>
@@ -154,7 +159,7 @@
                 <!-- chart end -->
                 <div class="space"></div>
                 <!-- bottom result start -->
-                <div id="bottomR">
+                <div id="bottomResult" class="bottomResult">
                     <div class="risk-management-right-top">
                         <div class="risk-management-right-0">
                             <div class="risk-management-result-title-bottom">FINAL CASH</div>
@@ -180,9 +185,11 @@
                             </div>
                         </div>
                         <div class="risk-management-right-0">
-                            <div class="risk-management-result-title-bottom">MAX DRAWDOWN</div>
+                            <div class="risk-management-result-title-bottom">MAX DRAWDOWN(%)</div>
                             <div class="risk-management-result-menu-bottom">{{'%.2f'
-                                %final_result[9]}}</div>
+                                %final_result[9]}}<img src="/static/img/image/risk/percent1.png" alt=""
+                                    class="icon-size"></div>
+
                         </div>
                     </div>
                     <div class="risk-management-right-top">
@@ -257,7 +264,7 @@
                 </div>
                 <!-- bottom result end -->
                 <!-- bottom multi start -->
-                <div id="multi" style="margin-left: 60px;">
+                <div id="multi" class="multi" style="margin-left: 60px;">
                     {% for i in range(0, dataRequired) %}
                     Final cash {{i+1}} : {{'%.2f'%finalCashMulti[i]}} ・ Pnl Net: {{'%.2f'%fnLNetMulti[i]}} ・ Strike
                     Rate: {{'%.2f'%StrikeRateMulti[i]}} ・ MAX DD: {{'%.2f'%finalMaxDDMulti[i]}}<br> {% endfor %}

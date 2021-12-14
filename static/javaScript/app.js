@@ -22,15 +22,19 @@ function topMenu(page) {
 }
 
 // top menu text
-function topMenuText() {
-  if (document.getElementById("top-menu0").innerHTML === "ストラテジー") {
-    document.getElementById("top-menu0").innerHTML = "STRATEGY";
-  } else {
-    document.getElementById("top-menu0").innerHTML = "ストラテジー";
-  }
-}
+// function topMenuText() {
+//   if (document.getElementById("top-menu0").innerHTML === "ストラテジー") {
+//     document.getElementById("top-menu0").innerHTML = "STRATEGY";
+//   } else {
+//     document.getElementById("top-menu0").innerHTML = "ストラテジー";
+//   }
+// }
 
 function riskResetValue() {
-  var initialCash = document.getElementById("initialCash");
-  initialCash.innerHTML.valueOf = "1000";
+  document.getElementById("initialCash").value = "1000";
+  document.getElementById("tradesRequired").value = "300";
+  document.getElementById("riskPerTrade").value = "1";
+  document.getElementById("profitRatio").value = "1";
+  document.getElementById("winRatio").value = "50";
+  document.getElementById("dataRequired").value = "dataRequired";
 }

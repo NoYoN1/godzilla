@@ -44,8 +44,7 @@
             <div id="top-menu2" onclick="topMenu(3)"><a href="#margets"
                     class="top-menu-style text-decoration-none">MARKETS</a>
             </div>
-            <div id="top-menu2" onclick="topMenu()"><a href="#" class="top-menu-style text-decoration-none">TEST</a>
-            </div>
+
         </div>
         <!-- end top menu -->
     </header>
@@ -58,7 +57,18 @@
                     <div class="row-flex">
                         <!-- start select box -->
                         <div class="strategy-select-box">
-
+                            <div class="mb-3">
+                                <label for="tradesRequired" class=" form-label">Trades required:</label>
+                                <select class="form-select" id="tradesRequired" name="tradesRequired">
+                                    <option>{{tradesRequired}}</option>
+                                    <option>100</option>
+                                    <option>200</option>
+                                    <option>300</option>
+                                    <option>400</option>
+                                    <option>500</option>
+                                    <option>1000</option>
+                                </select>
+                            </div>
                         </div>
                         <!-- end select box -->
                         <div class="strategy-image">

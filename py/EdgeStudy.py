@@ -23,8 +23,10 @@ class Simulate:
         # self.winRate = 50  # Percentage. Win Ratio, 50 = 50% win rate
 
         self.printTradeTrue = True
-        Initial_cash = initialCash  # Initial Cash
-        self.cash = Initial_cash
+        self.cash = initialCash
+        self.Initial_cash = self.cash
+        # Initial_cash = initialCash  # Initial Cash
+        #self.cash = Initial_cash
         self.tradesRequired = tradesRequired
         self.rpt = riskPerTrade / 100  # 1/100 = 1% Risk per Trade
         self.profitRatio = profitRatio  # 2 = 2:1 Profit Ratio
@@ -186,7 +188,7 @@ class Simulate:
             self.currentWinStreak = 0
 
         # Cumulative
-        self.pnlNet = (self.cash-100000)/100000 * 100
+        self.pnlNet = (self.cash-self.Initial_cash)/self.Initial_cash * 100
 
         # Strike Rate
         if self.tradeIsWin:

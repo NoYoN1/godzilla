@@ -42,6 +42,8 @@ XAUUSD
 
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
+
+import yfinance as yf
 import backtrader as bt
 import datetime
 import math
@@ -417,6 +419,8 @@ def printSQN(analyzer):
 
 
 cerebro = bt.Cerebro()  # create a "Cerebro" engine instance
+data1 = bt.feeds.PandasData(dataname=yf.download(
+    'EURUSD=X', '2007-01-01', '2020-01-01',))
 data = bt.feeds.GenericCSVData(
     dataname="datas/EURUSD_H4.csv",
     nullvalue=0.0,
@@ -431,7 +435,7 @@ data = bt.feeds.GenericCSVData(
     close=4,
     openinterest=-1
 )
-cerebro.adddata(data)
+cerebro.adddata(data1)
 cerebro.broker.set_cash(10000)
 cerebro.broker.setcommission(commission=0.000, margin=0, leverage=200.0)
 cerebro.addstrategy(FxMain)

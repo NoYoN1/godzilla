@@ -1,3 +1,7 @@
+import random
+rnd = random.randint(1, 5)
+print(rnd)
+
 
 # from pandas.io import json
 # temp_all = {1}

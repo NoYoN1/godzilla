@@ -2,29 +2,26 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/static/css/risk.css">
+    <script src="/static/javaScript/test.js"></script>
     <title>Document</title>
+    <script type="text/javascript">
+
+        ddd = {{ data | tojson }}
+        myVar = myFunc(ddd)
+        console.log(myVar)
+
+    </script>
 </head>
-<script>
-    var text = "[ 1.0, 1.1123, 1.2, 2.3, 4, 5, 6 ]";
-    var ar = [];
-    var ar1 = []
-    var num = 0;
 
-    ar = eval(text);
-    num = eval(text)
-
-
-    console.log(ar);
-    console.log(num);
-
-
-</script>
 
 
 <body>
-    <br>
+
+    <div id="d"></div>
+
 
 </body>
 

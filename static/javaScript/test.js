@@ -1,1 +1,3 @@
-await fetch("https://comp.ecc.ac.jp/");
+function myFunc(vars) {
+  return vars;
+}

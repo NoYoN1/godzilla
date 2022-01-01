@@ -6,6 +6,7 @@ async function load() {
   //get local data
   const response = await fetch(fileUrl);
   const cData = await response.json();
+  // "を消す
   chData = eval(cData);
   //データの長さを取得
   const trades = chData[0].length;

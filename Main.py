@@ -22,8 +22,8 @@ def index():
 
 @app.route('/test')
 def my_form():
-
-    return (render_template('test.html'))
+    data = {'username': 'Pang', 'site': 'stackoverflow.com'}
+    return (render_template('test.html', data=data))
 
 
 # @app.route('/object', )
@@ -100,6 +100,12 @@ def riskmanagement():
 def chart_html():
 
     return (render_template('/risk/chart.html', ))
+
+
+@ app.route('/st1')
+def st1_html():
+
+    return (render_template('/strategy/strategy1.html', ))
 
 
 @ app.route('/trade')

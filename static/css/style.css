@@ -254,6 +254,14 @@ h2 {
   margin: 0;
 }
 
+.rChart {
+  width: 100%;
+  text-align: center;
+  padding-bottom: 50px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* ###########################3 */
 .highcharts-figure,
 .highcharts-data-table table {
@@ -263,7 +271,9 @@ h2 {
 }
 
 .chart {
+  position: absolute;
   height: 220px;
+  justify-content: space-between;
 }
 
 .highcharts-data-table table {

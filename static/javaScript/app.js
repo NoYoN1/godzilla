@@ -42,7 +42,7 @@ function changeLanguage(ln) {
   var language = 1;
   if (language === ln) {
     document.getElementById("normal").innerHTML = "通常用";
-    document.getElementById("expert").innerHTML = "専用";
+    document.getElementById("expert").innerHTML = "専門用";
     document.getElementById("strategy-menu").innerHTML = "ストラテジー";
     document.getElementById("risk-manage").innerHTML = "リスク管理";
     document.getElementById("mrkt").innerHTML = "マーケット";

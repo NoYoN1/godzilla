@@ -27,10 +27,10 @@
     <header id="header">
         <div class="mode">
             <div><button type="button" id="normal" class="btn btn-outline-info"><a href=""
-                        class="text-decoration-none text-light ">NORMAL MODE</a></button></div>
+                        class="text-decoration-none text-light ">通常用</a></button></div>
             <div> &nbsp; &nbsp;&nbsp;&nbsp;</div>
-            <div><button type="button" id="expert" class="btn btn-outline-info"><a href=""
-                        class="text-decoration-none text-light ">EXPERT MODE</a></button></div>
+            <div><button type="button" id="expert" class="btn btn-outline-info text-decoration-none text-light"
+                    data-bs-toggle="modal" data-bs-target="#myModalLogin">専門用</button></div>
 
         </div>
         <div id="n" style="color: aliceblue;" onclick="changeLanguage(0)">EN</div>
@@ -43,22 +43,22 @@
         <div class="top-menu">
             <div id="top-menu0" onclick="topMenu(1)"><a href="#strategy" class="top-menu-style text-decoration-none"
                     id="strategy-menu">
-                    STRATEGY</a></div>
+                    ストラテジー</a></div>
             <div id="top-menu1" onclick="topMenu(2)"><a href="#risk-management"
-                    class="top-menu-style text-decoration-none" id="risk-manage"> RISK
-                    MANAGEMENT</a></div>
+                    class="top-menu-style text-decoration-none" id="risk-manage"> リスク管理</a></div>
             <div id="top-menu2" onclick="topMenu(3)"><a href="#margets" class="top-menu-style text-decoration-none"
-                    id="mrkt">MARKETS</a>
+                    id="mrkt">マーケット</a>
             </div>
 
         </div>
         <!-- end top menu -->
     </header>
+
     <main>
 
         <div id="strategy" class="strategy">
             <div class="section-strategy ">
-                <div class="strategy-title" id="titleStrategy">STRATEGY</div>
+                <div class="strategy-title" id="titleStrategy">ストラテジー</div>
                 <div class="d-flex p-3 ">
                     <div class="row-flex">
                         <!-- start select box -->
@@ -66,8 +66,7 @@
                             <div class="container  mt-3 ">
                                 <form action="{{url_for('riskmanagement')}}" method="post">
                                     <div class="mb-3">
-                                        <label for="tradesRequired" class=" form-label" id="slctStr">SELECT
-                                            STRATEGY</label>
+                                        <label for="tradesRequired" class=" form-label" id="slctStr">ストラテジー選択</label>
                                         <select class="form-select" id="tradesRequired" name="tradesRequired">
                                             <option>DojiSRSI</option>
                                         </select>
@@ -90,7 +89,7 @@
 
         <!-- strategy chart start -->
         <div class="section-chart">
-            <div class="chart-title">YOUR STRATEGY RESULT</div>
+            <div class="chart-title">ストラテジー結果</div>
             <div class="chart-result">
                 <div id="chart" class="rChart"></div>
             </div>
@@ -101,7 +100,7 @@
         <!-- RISK MANAGEMENT START  -->
         <div id="risk-management" class="risk-management">
             <div>
-                <h2 class="risk-title">RISK MANAGEMENT</h2>
+                <h2 class="risk-title">リスク管理</h2>
             </div>
             <div id="risk-management-flex" class="risk-management-flex">
                 <div class="risk-management-left">
@@ -178,7 +177,7 @@
         <!--  margets start  -->
         <div id="margets" class="margets">
             <div>
-                <h2>MARKETS</h2>
+                <h2>マーケット</h2>
 
                 {{c}}
 
@@ -189,15 +188,113 @@
         <!--  margets end  -->
     </main>
 
+    <!-- login start modal -->
+    <!-- The Modal -->
+    <div class="modal" id="myModalLogin">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">ログイン</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form action="{{url_for('result')}}" method="post">
+                        <div class=" mb-3">
+                            <label for="email" class="form-label">ユーザーメール:</label>
+                            <input class="form-control" type="email" id="email" name="email" placeholder="email">
+                        </div>
+                        <div class=" mb-3">
+                            <label for="pass" class="form-label">パスワード:</label>
+                            <input class="form-control" type="password" id="pass" name="pass" placeholder="password">
+                        </div>
+                        <div class="form-check mb-3">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="remember"> Remember me
+                            </label>
+                        </div>
+                        <button type="button" class=" btn btn-primary mt-3" data-bs-toggle="modal"
+                            data-bs-target="#myModalSignUp">登録</button>
+                        <button type="submit" class=" btn btn-success mt-3">送信</button>
 
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- login end -->
 
+    <!-- sign up start  -->
+    <!-- The Modal -->
+    <div class="modal" id="myModalSignUp">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">登録</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form action="{{url_for('register')}}" method="post">
+                        <div class=" mb-3">
+                            <label for="name" class="form-label">ユーザー名:</label>
+                            <input class="form-control" type="name" id="name" name="name" placeholder="name">
+                        </div>
+                        <div class=" mb-3">
+                            <label for="email" class="form-label">ユーザーメール:</label>
+                            <input class="form-control" type="email" id="email" name="email" placeholder="email">
+                        </div>
+                        <div class=" mb-3">
+                            <label for="pass" class="form-label">パスワード:</label>
+                            <input class="form-control" type="password" id="pass" name="pass" placeholder="password">
+                        </div>
+                        <button type="button" class=" btn btn-primary mt-3" data-bs-toggle="modal"
+                            data-bs-target="#myModalLogin">ログイン</button>
+                        <button type="submit" class=" btn btn-success mt-3">送信</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- sign up end -->
+
+    <!-- login unsuccessful start-->
+    {% if us %}
+    <script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(window).load(function () {
+            $('#myModalUnSuccessful').modal('show');
+        });
+    </script>
+    <!-- The Modal -->
+    <div class="modal" id="myModalUnSuccessful">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">ログイン失敗</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="alert alert-danger alert-dismissible">
+                        {{us}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    <!-- login unseccessful end -->
     <footer>
         <div class="footer-flex">
             <div class="footer-link">
-                <div class="footer-link"><a href="http://" class="text-decoration-none text-light ">CONTACT</a></div>
-                <div class="footer-link"><a href="http://" class="text-decoration-none text-light ">NEWS</a></div>
-                <div class="footer-link"><a href="http://" class="text-decoration-none text-light ">ABOUT</a></div>
-                <div class="footer-link"><a href="http://" class="text-decoration-none text-light ">SOCIALIZE</a></div>
+                <div class="footer-link"><a href="http://" class="text-decoration-none text-light ">連絡先</a></div>
+                <div class="footer-link"><a href="http://" class="text-decoration-none text-light ">ニュース</a></div>
+                <div class="footer-link"><a href="http://" class="text-decoration-none text-light ">事業情報</a></div>
+                <div class="footer-link"><a href="http://" class="text-decoration-none text-light ">SNS</a></div>
             </div>
             <div class="footer-copyrigth">Copyright ©2021</div>
         </div>

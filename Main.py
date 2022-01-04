@@ -126,17 +126,6 @@ def st1_html():
     return (render_template('/strategy/strategy1.html', ))
 
 
-@app.route('/trade')
-def trade_html():
-    print(b)
-    return (render_template('trade.html',))
-
-
-@app.route("/r")
-def reg():
-
-    return (render_template('/user/register.html'))
-
 ##########################################
 
 
@@ -159,9 +148,8 @@ def welcome():
     else:
         return redirect(url_for('login'))
 
+
 ##login##
-
-
 @app.route("/result", methods=["POST", "GET"])
 def result():
 
@@ -169,6 +157,7 @@ def result():
         result = request.form
         email = result["email"]
         password = result["pass"]
+
         try:
             user = auth.sign_in_with_email_and_password(email, password)
             global person
@@ -189,8 +178,6 @@ def result():
 
 @app.route("/register", methods=["POST", "GET"])
 def register():
-    success = "OK"
-    unsuccess = "NO"
     if request.method == "POST":
         result = request.form
         email = result["email"]

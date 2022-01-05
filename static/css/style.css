@@ -311,3 +311,9 @@ h2 {
 .highcharts-data-table tr:hover {
   background: #f1f7ff;
 }
+.language {
+  position: absolute;
+  top: 10%;
+  left: 85%;
+  display: flex;
+}

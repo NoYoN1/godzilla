@@ -5,7 +5,6 @@
 from re import S, template
 from flask import Flask, url_for, redirect,  request, render_template
 from pandas.io import json
-from flask import Markup
 import py_files.web_data
 # import py.coin1 as coin
 import py.EdgeStudy as EdgeStudy
@@ -131,14 +130,15 @@ def st1_html():
 
 @app.route("/login")
 def login():
-    successful = "OK"
+
     unsuccessful = "ログイン失敗しました。ユーザーメール、パスワードを確認してください。"
     return render_template("index.html", us=unsuccessful)
 
 
 @app.route("/signup")
 def signup():
-    return render_template("index.html")
+    successful = "登録完了しました。ログイン画面にログインしてください。"
+    return render_template("index.html", s=successful)
 
 
 @app.route("/welcome")
@@ -193,13 +193,13 @@ def register():
             person["name"] = name
             data = {"name": name, "email": email}
             db.child("users").child(person["uid"]).set(data)
-            return redirect(url_for('welcome'))
+            return redirect(url_for('signup'))
         except:
             return redirect(url_for('register'))
 
     else:
         if person["is_logged_in"] == True:
-            return redirect(url_for('welcome'))
+            return redirect(url_for('signup'))
         else:
             return redirect(url_for('register'))
 

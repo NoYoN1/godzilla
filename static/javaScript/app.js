@@ -53,5 +53,10 @@ function changeLanguage(ln) {
     document.getElementById("normal").style.color = "white";
     document.getElementById("expert").innerHTML = "EXPERT MODE";
     document.getElementById("expert").style.color = "white";
+    document.getElementById("strategy-menu").innerHTML = "STRATEGY";
+    document.getElementById("risk-manage").innerHTML = "RISK MANAGEMENT";
+    document.getElementById("mrkt").innerHTML = "MARKET";
+    document.getElementById("slctStr").innerHTML = "STRATEGY SELECT";
+    document.getElementById("titleStrategy").innerHTML = "STRATEGY";
   }
 }

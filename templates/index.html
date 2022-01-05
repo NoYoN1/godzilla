@@ -1,25 +1,28 @@
 <!-- 
     # 2021-10-10
-    # TUMUR UILS
+    # 
+    # Godzilla trade strategy 
+    # team G
     # 卒業作品
-    #
+    # TUMUR UILS
  -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-
     <link rel="stylesheet" href="/static/css/style.css">
     <script type=text/javascript src="/static/javaScript/app.js"></script>
-
+    <!-- chartjsorg chart -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- tradingview chart -->
     <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
-
+    <!-- google font -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&display=swap" rel="stylesheet">
     <title>{{title}}</title>
-
+    <!-- bootstrap auto show modal -->
+    <script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -31,15 +34,23 @@
             <div> &nbsp; &nbsp;&nbsp;&nbsp;</div>
             <div><button type="button" id="expert" class="btn btn-outline-info text-decoration-none text-light"
                     data-bs-toggle="modal" data-bs-target="#myModalLogin">専門用</button></div>
+            <div> &nbsp; &nbsp;&nbsp;&nbsp;</div>
 
         </div>
-        <div id="n" style="color: aliceblue;" onclick="changeLanguage(0)">EN</div>
-        <div id="n" style="color: aliceblue;" onclick="changeLanguage(1)">JP</div>
-
+        <div class="language">
+            <div id="language" onclick="changeLanguage(0)"><img src="/static/img/flag-united-states_1f1fa-1f1f8.png"
+                    alt="EN" srcset="" style="height: 30px;"></div>
+            <div> &nbsp; &nbsp;</div>
+            <div id="language" style="color: aliceblue;" onclick="changeLanguage(1)"><img
+                    src="/static/img/flag-japan_1f1ef-1f1f5.png" alt="JP" srcset="" style="height: 30px;"></div>
+        </div>
         <div class="top-title">
             <h1 class="top-title-font display-3 fw-bold ">GODZILLA TRADE STRATEGY</h1>
         </div>
+
+
         <!-- start top menu -->
+
         <div class="top-menu">
             <div id="top-menu0" onclick="topMenu(1)"><a href="#strategy" class="top-menu-style text-decoration-none"
                     id="strategy-menu">
@@ -49,15 +60,14 @@
             <div id="top-menu2" onclick="topMenu(3)"><a href="#margets" class="top-menu-style text-decoration-none"
                     id="mrkt">マーケット</a>
             </div>
-
         </div>
+
         <!-- end top menu -->
     </header>
-
     <main>
-
         <div id="strategy" class="strategy">
             <div class="section-strategy ">
+
                 <div class="strategy-title" id="titleStrategy">ストラテジー</div>
                 <div class="d-flex p-3 ">
                     <div class="row-flex">
@@ -86,7 +96,6 @@
                 </div>
             </div>
         </div>
-
         <!-- strategy chart start -->
         <div class="section-chart">
             <div class="chart-title">ストラテジー結果</div>
@@ -115,7 +124,6 @@
                                     aria-describedby="initialCash" value="1000">
                                 <div id="initialCash" class="form-text">Recommendation range 100-10000 $.</div>
                             </div>
-
                             <div class="mb-3">
                                 <label for="tradesRequired" class=" form-label">Trades required:</label>
                                 <select class="form-select" id="tradesRequired" name="tradesRequired">
@@ -169,8 +177,6 @@
                             class="risk-management-right-img"></div>
                 </div>
             </div>
-
-
         </div>
         <!--  RISK MANAGEMENT END  -->
 
@@ -178,16 +184,12 @@
         <div id="margets" class="margets">
             <div>
                 <h2>マーケット</h2>
-
                 {{c}}
-
                 <button type="submit" onclick="coino(a)">COIN</button>
             </div>
-
         </div>
         <!--  margets end  -->
     </main>
-
     <!-- login start modal -->
     <!-- The Modal -->
     <div class="modal" id="myModalLogin">
@@ -262,7 +264,6 @@
 
     <!-- login unsuccessful start-->
     {% if us %}
-    <script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.js" type="text/javascript"></script>
     <script type="text/javascript">
         $(window).load(function () {
             $('#myModalUnSuccessful').modal('show');
@@ -283,11 +284,48 @@
                         {{us}}
                     </div>
                 </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class=" btn btn-primary mt-3" data-bs-toggle="modal"
+                        data-bs-target="#myModalLogin">ログイン</button>
+                </div>
             </div>
         </div>
     </div>
     {% endif %}
     <!-- login unseccessful end -->
+    <!-- login successful start-->
+    {% if s %}
+    <script type="text/javascript">
+        $(window).load(function () {
+            $('#myModalSuccessful').modal('show');
+        });
+    </script>
+    <!-- The Modal -->
+    <div class="modal" id="myModalSuccessful">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">登録完了</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="alert alert-success alert-dismissible">
+                        {{s}}
+                    </div>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class=" btn btn-primary mt-3" data-bs-toggle="modal"
+                        data-bs-target="#myModalLogin">ログイン</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    <!-- login seccessful end -->
     <footer>
         <div class="footer-flex">
             <div class="footer-link">

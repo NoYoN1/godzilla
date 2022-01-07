@@ -42,6 +42,7 @@ function changeLanguage(ln) {
   var language = 1;
   if (language === ln) {
     document.getElementById("normal").innerHTML = "通常用";
+    document.getElementById("normal").style.color = "white";
     document.getElementById("expert").innerHTML = "専門用";
     document.getElementById("strategy-menu").innerHTML = "ストラテジー";
     document.getElementById("risk-manage").innerHTML = "リスク管理";
@@ -52,7 +53,6 @@ function changeLanguage(ln) {
     document.getElementById("normal").innerHTML = "NORMAL MODE";
     document.getElementById("normal").style.color = "white";
     document.getElementById("expert").innerHTML = "EXPERT MODE";
-    document.getElementById("expert").style.color = "white";
     document.getElementById("strategy-menu").innerHTML = "STRATEGY";
     document.getElementById("risk-manage").innerHTML = "RISK MANAGEMENT";
     document.getElementById("mrkt").innerHTML = "MARKET";

@@ -47,8 +47,7 @@ header {
   transition: 0.3s;
 }
 a {
-  text-decoration: none;
-  font-weight: bolder;
+  /* font-weight: bolder; */
   color: aliceblue;
 }
 a:hover {

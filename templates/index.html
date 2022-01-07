@@ -29,12 +29,12 @@
 
     <header id="header">
         <div class="mode">
-            <div><button type="button" id="normal" class="btn btn-outline-info"><a href=""
-                        class="text-decoration-none text-light ">通常用</a></button></div>
+            <div><button type="button" id="normal" class="btn btn-outline-info"><a href="{{url_for('index')}}"
+                        rel="noopener noreferrer" class="text-decoration-none text-light"> 通常用</a></button></div>
             <div> &nbsp; &nbsp;&nbsp;&nbsp;</div>
             <div><button type="button" id="expert" class="btn btn-outline-info text-decoration-none text-light"
                     data-bs-toggle="modal" data-bs-target="#myModalLogin">専門用</button></div>
-            <div> &nbsp; &nbsp;&nbsp;&nbsp;</div>
+            <div> &nbsp;&nbsp;&nbsp;&nbsp;</div>
 
         </div>
         <div class="language">
@@ -204,8 +204,9 @@
                 <div class="modal-body">
                     <form action="{{url_for('result')}}" method="post">
                         <div class=" mb-3">
-                            <label for="email" class="form-label">ユーザーメール:</label> ecc@ecc.com
-                            <input class="form-control" type="email" id="email" name="email" placeholder="email">
+                            <label for="email" class="form-label">メール:</label>ecc@ecc.com
+                            <input class="form-control" type="email" id="email" name="email" placeholder="email"
+                                value="{{email}}">
                         </div>
                         <div class=" mb-3">
                             <label for="pass" class="form-label">パスワード:</label>111222
@@ -245,7 +246,7 @@
                             <input class="form-control" type="name" id="name" name="name" placeholder="name">
                         </div>
                         <div class=" mb-3">
-                            <label for="email" class="form-label">ユーザーメール:</label>
+                            <label for="email" class="form-label">メール:</label>
                             <input class="form-control" type="email" id="email" name="email" placeholder="email">
                         </div>
                         <div class=" mb-3">
@@ -263,7 +264,7 @@
     <!-- sign up end -->
 
     <!-- login unsuccessful start-->
-    {% if us %}
+    {% if unsuccessful %}
     <script type="text/javascript">
         $(window).load(function () {
             $('#myModalUnSuccessful').modal('show');
@@ -281,7 +282,7 @@
                 <!-- Modal body -->
                 <div class="modal-body">
                     <div class="alert alert-danger alert-dismissible">
-                        {{us}}
+                        {{unsuccessful}}
                     </div>
                 </div>
                 <!-- Modal footer -->
@@ -295,7 +296,7 @@
     {% endif %}
     <!-- login unseccessful end -->
     <!-- login successful start-->
-    {% if s %}
+    {% if ssuccessful %}
     <script type="text/javascript">
         $(window).load(function () {
             $('#myModalSuccessful').modal('show');
@@ -313,7 +314,7 @@
                 <!-- Modal body -->
                 <div class="modal-body">
                     <div class="alert alert-success alert-dismissible">
-                        {{s}}
+                        {{ssuccessful}}
                     </div>
                 </div>
                 <!-- Modal footer -->

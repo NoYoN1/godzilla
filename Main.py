@@ -3,7 +3,7 @@
 # 卒業作品
 #
 from re import S, template
-from flask import Flask, url_for, redirect,  request, render_template
+from flask import Flask, url_for, redirect, request, render_template, session
 from pandas.io import json
 import py_files.web_data
 # import py.coin1 as coin
@@ -31,10 +31,12 @@ db = firebase.database()
 person = {"is_logged_in": False, "name": "", "email": "", "uid": ""}
 
 
-@app.route('/',)
+@app.route('/', methods=["GET", "POST"])
 def index():
 
-    return (render_template('index.html'))
+    return render_template('index.html')
+
+    # return (render_template('index.html'))
 
 
 @app.route('/test')
@@ -132,13 +134,21 @@ def st1_html():
 def login():
 
     unsuccessful = "ログイン失敗しました。ユーザーメール、パスワードを確認してください。"
-    return render_template("index.html", us=unsuccessful)
+    return render_template("index.html", unsuccessful=unsuccessful)
+
+
+@app.route("/logout")
+def logout():
+    person["is_logged_in"] = False
+
+    return redirect(url_for("index"))
 
 
 @app.route("/signup")
 def signup():
-    successful = "登録完了しました。ログイン画面にログインしてください。"
-    return render_template("index.html", s=successful)
+    if person["is_logged_in"] == True:
+        successful = "登録完了しました。ログイン画面にログインしてください。"
+        return render_template("index.html", successful=successful)
 
 
 @app.route("/welcome")
@@ -152,7 +162,8 @@ def welcome():
 ##login##
 @app.route("/result", methods=["POST", "GET"])
 def result():
-
+    if request.form.get('remember') != None:
+        return render_template('index.html', email='person["email"]')
     if request.method == "POST":
         result = request.form
         email = result["email"]
@@ -169,6 +180,7 @@ def result():
             return redirect(url_for('welcome'))
         except:
             return redirect(url_for('login'))
+
     else:
         if person["is_logged_in"] == True:
             return redirect(url_for('welcome'))
@@ -195,13 +207,25 @@ def register():
             db.child("users").child(person["uid"]).set(data)
             return redirect(url_for('signup'))
         except:
-            return redirect(url_for('register'))
+            return redirect(url_for('index'))
 
     else:
         if person["is_logged_in"] == True:
             return redirect(url_for('signup'))
         else:
-            return redirect(url_for('register'))
+            return redirect(url_for('index'))
+
+
+@app.route("/strategy")
+def strategy():
+    return render_template("/expert/expert.html")
+
+
+@app.route("/strategy", methods=["POST", "GET"])
+def strategy_analyze():
+    if request.method == "POST":
+
+        return redirect(url_for('strategy'))
 
 
 if __name__ == '__main__':

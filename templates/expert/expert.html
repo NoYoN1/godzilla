@@ -3,28 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <title>Expert</title>
+    <link rel="stylesheet" href="/static/css/expert.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body>
+    <!-- navbar start -->
     <nav class="navbar navbar-expand-sm bg-light navbar-light sticky-top">
         <div class="container-fluid">
-
             <ul class="navbar-nav">
-                <span class="navbar-text">専門用</span>
+                <span class="mytextnavbar navbar-text">専門用</span>&nbsp;&nbsp;&nbsp;
                 <li class="nav-item">
-                    <a class="navbar-brand" href="#">
-                        <img src="/static/img/img_avatar1.png" alt="" style="width:40px;" class="rounded-pill">
-                    </a>
+                    <img src="/static/img/img_avatar1.png" alt="" style="width:40px;" class="rounded-pill">
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Welcome {{email}} {{name}}</a>
+                    <a class="nav-link active" href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvas">ようこそ:
+                        {{name}}</a>
                 </li>
-
-
             </ul>
         </div>
     </nav>
+    <!-- navbar end -->
+    <!-- Offcanvas Sidebar start-->
+    <div class="offcanvas offcanvas-start" id="offcanvas">
+        <div class="offcanvas-header">
+            <h1 class="offcanvas-title">プロフィール</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body">
+            <p>ユーザー名: {{name}}</p>
+            <p>メール: {{email}}</p>
+            <a href="{{url_for('logout')}}"><button class="btn btn-secondary" type="button">ログアウト</button></a>
+        </div>
+    </div>
+    <!-- Offcanvas Sidebar end-->
+    <div id="strategy" class="strategy">
+        <div id="select-strategy" class="select-strategy">
+            <!-- start select box -->
+            <div class="strategy-select-box">
+                <div class="container  mt-3 ">
+                    <form action="{{url_for('strategy_analyze')}}" method="post">
+                        <div class="mb-3">
+                            <label for="tradesRequired" class=" form-label" id="slctStr">ストラテジー選択</label>
+                            <select class="form-select" id="tradesRequired" name="tradesRequired">
+                                <option>DojiSRSI</option>
+                            </select>
+                            <button type="submit" class="btn btn-success mt-3 my-btn">Submit</button>
+                            <br>
+                            <br>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- end select box -->
+    </div>
+    <div id="result-strategy" class="result-strategy"></div>
+    </div>
 </body>
 
 </html>

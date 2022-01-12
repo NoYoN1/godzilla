@@ -1,13 +1,18 @@
+
 # 2021-10-10
-#
+# FX,backtest シミュレーションシステム
+# Godzilla trade strategy
+# team G
 # 卒業作品
-#
-from re import S, template
+# TUMUR UILS
+
 from flask import Flask, url_for, redirect, request, render_template, session
 from pandas.io import json
 import py_files.web_data
 # import py.coin1 as coin
+import backtrader as bt
 import py.EdgeStudy as EdgeStudy
+import strategy.FxDojiSRSI as FxDojiSRSI
 import pyrebase
 app = Flask(__name__)
 
@@ -162,8 +167,7 @@ def welcome():
 ##login##
 @app.route("/result", methods=["POST", "GET"])
 def result():
-    if request.form.get('remember') != None:
-        return render_template('index.html', email='person["email"]')
+
     if request.method == "POST":
         result = request.form
         email = result["email"]
@@ -218,7 +222,7 @@ def register():
 
 @app.route("/strategy")
 def strategy():
-    return render_template("/expert/expert.html")
+    return render_template("/strategy/strategy.html")
 
 
 @app.route("/strategy", methods=["POST", "GET"])
@@ -226,6 +230,22 @@ def strategy_analyze():
     if request.method == "POST":
 
         return redirect(url_for('strategy'))
+
+
+@app.route("/str", methods=["POST", "GET"])
+def normal_strategy_result():
+    if request.method == "POST":
+        check = True
+        strategy_result = FxDojiSRSI
+        firstStrat = strategy_result.firstStrat
+        analyzer = firstStrat.analyzers.ta.get_analysis()
+        finalResult = strategy_result.printTradeAnalysis(analyzer)
+        setCash = strategy_result.setCash
+        finalValue = strategy_result.finalValue
+        finalCash = strategy_result.finalCash
+
+        return render_template("/strategy/strategy.html", finalResult=finalResult, setCash=setCash, finalValue=finalValue, finalCash=finalCash, check=check)
+    return render_template("index.html")
 
 
 if __name__ == '__main__':

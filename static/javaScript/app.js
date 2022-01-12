@@ -21,6 +21,10 @@ function topMenu(page) {
   }
 }
 
+function strategy_result() {
+  document.getElementById("sResult").style.display = "block";
+}
+
 // top menu text
 // function topMenuText() {
 //   if (document.getElementById("top-menu0").innerHTML === "ストラテジー") {
@@ -49,6 +53,9 @@ function changeLanguage(ln) {
     document.getElementById("mrkt").innerHTML = "マーケット";
     document.getElementById("slctStr").innerHTML = "ストラテジー選択";
     document.getElementById("titleStrategy").innerHTML = "ストラテジー";
+    document.getElementById("top-title").innerHTML =
+      "ゴジラ トレード ストラテジー";
+    document.getElementById("strategy-text").innerHTML = "貿易戦略を楽しむ";
   } else {
     document.getElementById("normal").innerHTML = "NORMAL MODE";
     document.getElementById("normal").style.color = "white";
@@ -58,5 +65,8 @@ function changeLanguage(ln) {
     document.getElementById("mrkt").innerHTML = "MARKET";
     document.getElementById("slctStr").innerHTML = "STRATEGY SELECT";
     document.getElementById("titleStrategy").innerHTML = "STRATEGY";
+    document.getElementById("top-title").innerHTML = "GODZILLA TRADE STRATEGY";
+    document.getElementById("strategy-text").innerHTML =
+      "Enjoy trade strategies";
   }
 }

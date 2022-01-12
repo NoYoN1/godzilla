@@ -1,0 +1,36 @@
+* {
+  font-family: "Open Sans Condensed", sans-serif;
+}
+body {
+  margin: 0px;
+  padding: 0px;
+}
+.chart {
+  /* position: relative; */
+  justify-content: center;
+}
+
+.rChart {
+  padding-bottom: 50px;
+  margin-left: 50px;
+  margin-right: auto;
+  width: 90%;
+}
+.strategeResultFlexTitle {
+  display: flex;
+  width: 60%;
+  color: #646464;
+}
+.strategeResultFlex {
+  display: flex;
+  width: 60%;
+}
+.sResult {
+  /* display: none; */
+  margin-left: 50px;
+  padding-bottom: 50px;
+  font-weight: bolder;
+}
+.item {
+  margin: auto;
+}

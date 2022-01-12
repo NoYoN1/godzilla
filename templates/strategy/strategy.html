@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Strategy</title>
+    <link rel="stylesheet" href="/static/css/strategy.css">
+    <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+</head>
+
+<body>
+    <div class="chart">
+        <div id="chart" class="rChart"></div>
+    </div>
+    <!-- strategy result start -->
+    {% if check %}
+    <div id="sResult" class="sResult">
+        <p>Starting Portfolio Value: {{setCash}}</p>
+        <div class="strategeResultFlexTitle">
+            <div class="item">Total Open</div>
+            <div class="item">Total Closed</div>
+            <div class="item">Total Won</div>
+            <div class="item">Total Lost</div>
+        </div>
+        <div class="strategeResultFlex">
+            {%for i in range(0, 4)%}
+            <div class="item">{{finalResult[0][i]}}</div>
+            {%endfor%}
+        </div>
+        <div class="strategeResultFlexTitle">
+            <div class="item">Strike Rate</div>
+            <div class="item">Win Streak</div>
+            <div class="item">Losing Streak</div>
+            <div class="item">PnL Net</div>
+        </div>
+        <div class="strategeResultFlex">
+            {%for i in range(0, 4)%}
+            <div class="item">{{finalResult[1][i]}}</div>
+            {%endfor%}
+        </div>
+        <p style="margin-top: 20px;">Final Portfolio Value: {{'%.2f'%finalValue}}</p>
+        <p>Final Portfolio Cash : {{'%.2f'%finalCash}}</p>
+    </div>
+    {% endif %}
+    <!-- strategy result end -->
+
+    <script src="/static/javaScript/chart.js"></script>
+</body>
+
+</html>

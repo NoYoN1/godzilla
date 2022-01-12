@@ -1,6 +1,6 @@
 <!-- 
     # 2021-10-10
-    # 
+    # FX,backtest シミュレーションシステム
     # Godzilla trade strategy 
     # team G
     # 卒業作品
@@ -33,7 +33,7 @@
                         rel="noopener noreferrer" class="text-decoration-none text-light"> 通常用</a></button></div>
             <div> &nbsp; &nbsp;&nbsp;&nbsp;</div>
             <div><button type="button" id="expert" class="btn btn-outline-info text-decoration-none text-light"
-                    data-bs-toggle="modal" data-bs-target="#myModalLogin">専門用</button></div>
+                    data-bs-toggle="modal" data-bs-target="#myModalLogin">専門</button></div>
             <div> &nbsp;&nbsp;&nbsp;&nbsp;</div>
 
         </div>
@@ -45,7 +45,7 @@
                     src="/static/img/flag-japan_1f1ef-1f1f5.png" alt="JP" srcset="" style="height: 30px;"></div>
         </div>
         <div class="top-title">
-            <h1 class="top-title-font display-3 fw-bold ">GODZILLA TRADE STRATEGY</h1>
+            <h1 id="top-title" class="top-title-font display-3 fw-bold ">ゴジラ トレード ストラテジー</h1>
         </div>
 
 
@@ -74,13 +74,14 @@
                         <!-- start select box -->
                         <div class="strategy-select-box">
                             <div class="container  mt-3 ">
-                                <form action="{{url_for('riskmanagement')}}" method="post">
+                                <form action="{{url_for('normal_strategy_result')}}" method="post">
                                     <div class="mb-3">
                                         <label for="tradesRequired" class=" form-label" id="slctStr">ストラテジー選択</label>
                                         <select class="form-select" id="tradesRequired" name="tradesRequired">
                                             <option>DojiSRSI</option>
                                         </select>
-                                        <button type="submit" class="btn btn-success mt-3 my-btn">Submit</button>
+                                        <button type="submit" class="btn btn-success mt-3 my-btn"
+                                            onclick="strategy_result()">Submit</button>
                                         <br>
                                         <br>
                                 </form>
@@ -91,7 +92,7 @@
                     <div class="strategy-image">
                         <img class="img-pos" src="/static/img/image/shinzo.png" width="80%" height="auto" alt=""
                             srcset="">
-                        <p class="strategy-text">Enjoy trade strategies</p>
+                        <p id="strategy-text" class="strategy-text">貿易戦略を楽しむ</p>
                     </div>
                 </div>
             </div>
@@ -100,8 +101,10 @@
         <div class="section-chart">
             <div class="chart-title">ストラテジー結果</div>
             <div class="chart-result">
-                <div id="chart" class="rChart"></div>
+                <!-- <div id="chart" class="rChart"></div> -->
             </div>
+            <iframe width="100%" height="435" src="http://127.0.0.1:5550/strategy" title="Chart"></iframe>
+
         </div>
         <!-- strategy chart end -->
         </div>
@@ -333,14 +336,11 @@
                 <div class="footer-link"><a href="#" class="text-decoration-none text-light ">連絡先</a></div>
                 <div class="footer-link"><a href="#" class="text-decoration-none text-light ">ニュース</a></div>
                 <div class="footer-link"><a href="#" class="text-decoration-none text-light ">チーム情報</a></div>
-
             </div>
             <div class="footer-copyrigth">Copyright ©2021</div>
         </div>
     </footer>
     <script src="/static/javaScript/chart.js"></script>
 </body>
-
-
 
 </html>

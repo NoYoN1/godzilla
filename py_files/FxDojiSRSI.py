@@ -411,7 +411,6 @@ def printTradeAnalysis(analyzer):
     print("Trade Analysis Results:")
     for row in print_list:
         print(row_format.format('', *row))
-    return (r1, r2)
 
 
 def printSQN(analyzer):
@@ -421,7 +420,7 @@ def printSQN(analyzer):
 
 cerebro = bt.Cerebro()  # create a "Cerebro" engine instance
 data1 = bt.feeds.PandasData(dataname=yf.download(
-    'EURUSD=X', '2007-10-01', '2021-01-01',))
+    'EURUSD=X', '2007-01-01', '2020-01-01',))
 data = bt.feeds.GenericCSVData(
     dataname="datas/EURUSD_H4.csv",
     nullvalue=0.0,
@@ -438,7 +437,6 @@ data = bt.feeds.GenericCSVData(
 )
 cerebro.adddata(data1)
 cerebro.broker.set_cash(10000)
-setCash = cerebro.broker.getvalue()
 cerebro.broker.setcommission(commission=0.000, margin=0, leverage=200.0)
 cerebro.addstrategy(FxMain)
 cerebro.addanalyzer(bt.analyzers.TradeAnalyzer, _name="ta")
@@ -447,11 +445,9 @@ cerebro.addanalyzer(bt.analyzers.SQN, _name="sqn")
 print("Starting Portfolio Value :%.5f" % (cerebro.broker.getvalue()))
 strategies = cerebro.run()  # run it all
 firstStrat = strategies[0]
-finalValue = cerebro.broker.getvalue()
-finalCash = cerebro.broker.getcash()
 print("Final Portfolio Value:%.5f" % (cerebro.broker.getvalue()))
 print("Final Portfolio Cash :%.5f" % (cerebro.broker.getcash()))
 
 printTradeAnalysis(firstStrat.analyzers.ta.get_analysis())
 printSQN(firstStrat.analyzers.sqn.get_analysis())
-# cerebro.plot(style="candlestick", barup='green', bardown='red')
+cerebro.plot(style="candlestick", barup='green', bardown='red')

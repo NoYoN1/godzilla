@@ -30,15 +30,23 @@ var series = chart.addCandlestickSeries({
   borderVisible: false,
 });
 const fileUrl = "/static/json/EURUSD_D1.json";
+const fileUrlChart = "/static/json/buysell.json";
 async function load() {
   //get local data
   const response = await fetch(fileUrl);
   const cData = await response.json();
   var data = cData;
 
+  const chartbs = await fetch(fileUrlChart);
+  const chData = await chartbs.json();
+  var chartData = chData;
+
+  console.log(chartData["buy"][0]);
+
   series.setData(data);
   //data.length - 19
-  var datesForMarkers = [data[19], data[20]];
+  var datesForMarkers = [data[19], data[26], data[27], data[28]];
+
   var indexOfMinPrice = 0;
   for (var i = 1; i < datesForMarkers.length; i++) {
     if (datesForMarkers[i].high < datesForMarkers[indexOfMinPrice].high) {

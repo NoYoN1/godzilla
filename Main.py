@@ -6,13 +6,23 @@
 # 卒業作品
 # TUMUR UILS
 
+from pickle import TRUE
+from pydoc import cli
+from xmlrpc.client import boolean
+import click
 from flask import Flask, url_for, redirect, request, render_template, session
+import pandas as pd
+import numpy as np
 from pandas.io import json
 import py_files.web_data
 # import py.coin1 as coin
 import backtrader as bt
 import py.EdgeStudy as EdgeStudy
+import strategy.FxDoji_SRSI_1 as FxDoji_SRSI_1
+import strategy.FxMA_Crossover as MA
+
 import strategy.FxDojiSRSI as FxDojiSRSI
+# pip install pyrebase4
 import pyrebase
 app = Flask(__name__)
 
@@ -31,13 +41,19 @@ config = {
 firebase = pyrebase.initialize_app(config)
 auth = firebase.auth()
 db = firebase.database()
-
-
 person = {"is_logged_in": False, "name": "", "email": "", "uid": ""}
+
+show_result_Data = {0: 0}
+show_result_data_paid = {0: 0}
 
 
 @app.route('/', methods=["GET", "POST"])
 def index():
+    show_result_Data = {0: 0}
+    jsr = json.dumps(show_result_Data)
+    file = open('static/json/show_result_Data.json', 'w')
+    file.write(jsr)
+    file.close()
 
     return render_template('index.html')
 
@@ -126,12 +142,6 @@ def chart_html():
     return (render_template('/risk/chart.html', ))
 
 
-@app.route('/st1')
-def st1_html():
-
-    return (render_template('/strategy/strategy1.html', ))
-
-
 ##########################################
 
 
@@ -158,6 +168,11 @@ def signup():
 
 @app.route("/welcome")
 def welcome():
+    show_result_data_paid = {0: 0}
+    jsr = json.dumps(show_result_data_paid)
+    file = open('static/json/show_result_data_paid.json', 'w')
+    file.write(jsr)
+    file.close()
     if person["is_logged_in"] == True:
         return render_template("/expert/expert.html", email=person["email"], name=person["name"])
     else:
@@ -220,20 +235,56 @@ def register():
             return redirect(url_for('index'))
 
 
-@app.route("/strategy")
+@app.route("/e_strategy", methods=["POST", "GET"])
+def paid_strategy():
+    clicked = False
+    if request.method == "POST":
+        person["is_logged_in"] = True
+        clicked = True
+        # initialCash = request.form["initialCash"]
+        initialCash = request.form.get("initialCash", type=int)
+        riskPerTrade = request.form.get("riskPerTrade", type=float)
+
+        dojiValue = request.form.get("dojiValue", type=float)
+        RSIvalueUpper = request.form.get("RSIvalueUpper", type=float)
+        RSIvalueLower = request.form.get("RSIvalueLower", type=float)
+
+        StopLossATR = request.form.get("StopLossATR", type=float)
+        TakeProfitATR = request.form.get("TakeProfitATR", type=float)
+    else:
+        clicked = False
+        # temp2.Simulate(initialCash)
+    FxDoji_SRSI_1.Simulate(initialCash, riskPerTrade, StopLossATR, TakeProfitATR,
+                           dojiValue, RSIvalueUpper, RSIvalueLower)
+    strategy_result = FxDoji_SRSI_1.Simulate
+    # firstStrat = strategy_result.firstStrat
+    # analyzer = firstStrat.analyzers.ta.get_analysis()
+    # finalResult = strategy_result.printTradeAnalysis(analyzer)
+    setCash = strategy_result
+    # finalValue = strategy_result.finalValue
+    # finalCash = strategy_result.finalCash
+
+    show_result_data_paid = {0: 1}
+    jsr = json.dumps(show_result_data_paid)
+    file = open('static/json/show_result_data_paid.json', 'w')
+    file.write(jsr)
+    file.close()
+    return render_template("expert/expert.html", clicked=clicked, initialCash=initialCash, TakeProfitATR=TakeProfitATR, StopLossATR=StopLossATR, riskPerTrade=riskPerTrade, dojiValue=dojiValue, RSIvalueUpper=RSIvalueUpper, RSIvalueLower=RSIvalueLower, email=person["email"], name=person["name"])
+
+
+@app.route("/strategy1")
 def strategy():
-    return render_template("/strategy/strategy.html")
+    return render_template("strategy/strategy.html")
+
+# strategy(check, finalResult, setCash, finalValue, finalCash)
+# check, finalResult, setCash, finalValue, finalCash
+# finalResult=finalResult, setCash=setCash, finalValue=finalValue, finalCash=finalCash, check=check
 
 
 @app.route("/strategy", methods=["POST", "GET"])
-def strategy_analyze():
-    if request.method == "POST":
-
-        return redirect(url_for('strategy'))
-
-
-@app.route("/str", methods=["POST", "GET"])
 def normal_strategy_result():
+
+    # if request.method == "POST":
     if request.method == "POST":
         check = True
         strategy_result = FxDojiSRSI
@@ -243,9 +294,18 @@ def normal_strategy_result():
         setCash = strategy_result.setCash
         finalValue = strategy_result.finalValue
         finalCash = strategy_result.finalCash
-
-        return render_template("/strategy/strategy.html", finalResult=finalResult, setCash=setCash, finalValue=finalValue, finalCash=finalCash, check=check)
-    return render_template("index.html")
+        # strategy(check, finalResult, setCash, finalValue, finalCash)
+        # Since the headers are missing in the csv file, explicitly passing the field names in the program
+        csv_file = pd.DataFrame(pd.read_csv("datas/EURUSD_D1.csv", sep=",", names=[
+                                "time", "open", "high", "low", "close", "volume"], index_col=False))
+        csv_file.to_json("static/json/EURUSD_D1.json", orient="records", date_format="epoch",
+                         double_precision=10, force_ascii=True, date_unit="ms", default_handler=None)
+        show_result_Data = {0: 1}
+        jsr = json.dumps(show_result_Data)
+        file = open('static/json/show_result_Data.json', 'w')
+        file.write(jsr)
+        file.close()
+        return render_template("index.html", finalResult=finalResult, setCash=setCash, finalValue=finalValue, finalCash=finalCash, check=check)
 
 
 if __name__ == '__main__':

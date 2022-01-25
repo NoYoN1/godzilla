@@ -29,15 +29,17 @@
 
     <header id="header">
         <div class="mode">
-            <div><button type="button" id="normal" class="btn btn-outline-info"><a href="{{url_for('index')}}"
-                        rel="noopener noreferrer" class="text-decoration-none text-light"> 通常用</a></button></div>
+            <!-- <div><button type="button" id="normal" class="btn btn-outline-info"><a href="{{url_for('index')}}"
+                        rel="noopener noreferrer" class="text-decoration-none text-light"> 通常用</a></button></div> -->
             <div> &nbsp; &nbsp;&nbsp;&nbsp;</div>
-            <div><button type="button" id="expert" class="btn btn-outline-info text-decoration-none text-light"
-                    data-bs-toggle="modal" data-bs-target="#myModalLogin">専門</button></div>
+
             <div> &nbsp;&nbsp;&nbsp;&nbsp;</div>
 
         </div>
         <div class="language">
+            <div><button type="button" id="expert" class="btn btn-info text-decoration-none text-light"
+                    data-bs-toggle="modal" data-bs-target="#myModalLogin">ログイン</button></div>
+            <div> &nbsp; &nbsp; &nbsp;</div>
             <div id="language" onclick="changeLanguage(0)"><img src="/static/img/flag-united-states_1f1fa-1f1f8.png"
                     alt="EN" srcset="" style="height: 30px;"></div>
             <div> &nbsp; &nbsp;</div>
@@ -52,11 +54,14 @@
         <!-- start top menu -->
 
         <div class="top-menu">
+            <div id="top-menu0" onclick="topMenu(1)"><a href="{{ url_for('index') }}"
+                    class="top-menu-style text-decoration-none" id="home">
+                    ホーム</a></div> &nbsp;&nbsp;
             <div id="top-menu0" onclick="topMenu(1)"><a href="#strategy" class="top-menu-style text-decoration-none"
                     id="strategy-menu">
-                    ストラテジー</a></div>
+                    ストラテジー</a></div>&nbsp;
             <div id="top-menu1" onclick="topMenu(2)"><a href="#risk-management"
-                    class="top-menu-style text-decoration-none" id="risk-manage"> リスク管理</a></div>
+                    class="top-menu-style text-decoration-none" id="risk-manage"> リスク管理</a></div>&nbsp;&nbsp;
             <div id="top-menu2" onclick="topMenu(3)"><a href="#margets" class="top-menu-style text-decoration-none"
                     id="mrkt">マーケット</a>
             </div>
@@ -76,14 +81,33 @@
                             <div class="container  mt-3 ">
                                 <form action="{{url_for('normal_strategy_result')}}" method="post">
                                     <div class="mb-3">
-                                        <label for="tradesRequired" class=" form-label" id="slctStr">ストラテジー選択</label>
-                                        <select class="form-select" id="tradesRequired" name="tradesRequired">
-                                            <option>DojiSRSI</option>
+                                        <label for="selectData" class=" form-label" id="selectDataText">データ選択</label>
+                                        <select class="form-select" id="selectData" name="selectData">
+                                            <option>EURUSD_D1</option>
+                                            <option disabled>EURJPY_D1</option>
+                                            <option disabled>EURJPY_H1</option>
                                         </select>
-                                        <button type="submit" class="btn btn-success mt-3 my-btn"
-                                            onclick="strategy_result()">Submit</button>
+
+                                        <label for="selectStrategy" class=" form-label"
+                                            id="selectStrategy">ストラテジー選択</label>
+                                        <select class="form-select" id="selectStrategy" name="selectStrategy">
+                                            <option>DojiSRSI</option>
+                                            <option disabled>FxMA_Crossover</option>
+                                        </select>
+
+                                        <button id="btn" type="submit" class="btn btn-success mt-3 my-btn"
+                                            onclick="selectData(); result_data()">
+                                            <Submit href="#strategy">Submit</a>
+                                        </button>
                                         <br>
                                         <br>
+                                        <!-- test -->
+                                        <script>
+                                            function selectData() {
+                                                var x = document.getElementById("selectData").selectedIndex;
+                                                alert(x);
+                                            }
+                                        </script>
                                 </form>
                             </div>
                         </div>
@@ -98,13 +122,64 @@
             </div>
         </div>
         <!-- strategy chart start -->
-        <div class="section-chart">
-            <div class="chart-title">ストラテジー結果</div>
+        <div id="section-chart" class="section-chart">
+            <div class=" chart-title">ストラテジー結果</div>
             <div class="chart-result">
                 <!-- <div id="chart" class="rChart"></div> -->
-            </div>
-            <iframe width="100%" height="435" src="http://127.0.0.1:5550/strategy" title="Chart"></iframe>
+                <!-- show chart and result  -->
+                <script>
+                    const rFileUrl = "static/json/show_result_data.json";
+                    async function result_data() {
+                        const response = await fetch(rFileUrl);
+                        const rData = await response.json();
+                        var resultData = rData;
+                        console.log(resultData[0]);
+                        if (resultData[0] === 1) {
+                            document.getElementById("section-chart").style.display = "block";
+                        } else {
+                            document.getElementById("section-chart").style.display = "none";
+                        }
+                    }
+                    result_data();
+                </script>
 
+            </div>
+            <!-- <iframe width="100%" height="900px" src="http://127.0.0.1:5550/strategy" title="Chart"></iframe> -->
+            <div class="chart">
+                <div id="chart" class="rChart"></div>
+
+                <!-- strategy result start -->
+                <!-- {% if check %} -->
+                <div id="sResult" class="sResult">
+                    <p>Starting Portfolio Value: {{setCash}}</p>
+                    <div class="strategeResultFlexTitle">
+                        <div class="item">Total Open</div>
+                        <div class="item">Total Closed</div>
+                        <div class="item">Total Won</div>
+                        <div class="item">Total Lost</div>
+                    </div>
+                    <div class="strategeResultFlex">
+                        {%for i in range(0, 4)%}
+                        <div class="item">{{finalResult[0][i]}}</div>
+                        {%endfor%}
+                    </div>
+                    <div class="strategeResultFlexTitle">
+                        <div class="item">Strike Rate</div>
+                        <div class="item">Win Streak</div>
+                        <div class="item">Losing Streak</div>
+                        <div class="item">PnL Net</div>
+                    </div>
+                    <div class="strategeResultFlex">
+                        {%for i in range(0, 4)%}
+                        <div class="item">{{finalResult[1][i]}}</div>
+                        {%endfor%}
+                    </div>
+                    <p style="margin-top: 20px;">Final Portfolio Value: {{'%.2f'%finalValue}}</p>
+                    <p>Final Portfolio Cash : {{'%.2f'%finalCash}}</p>
+                </div>
+                <!-- {% endif %} -->
+                <!-- strategy result end -->
+            </div>
         </div>
         <!-- strategy chart end -->
         </div>
@@ -152,7 +227,7 @@
                                 <label for="profitRatio" class=" form-label">Profit Ratio: </label>
                                 <input class="form-control" id="profitRatio" name="profitRatio"
                                     aria-describedby="profitRatio" value="1">
-                                <div id="winRatio" class="form-text">2 = 2:1 Profit Ratio</div>
+                                <div id="winRatio" class="form-text">2 = 2:1 Profit Loss Ratio</div>
                             </div>
 
                             <div class=" mb-3">
@@ -222,7 +297,7 @@
                         </div>
                         <button type="button" class=" btn btn-primary mt-3" data-bs-toggle="modal"
                             data-bs-target="#myModalSignUp">登録</button>
-                        <button type="submit" class=" btn btn-success mt-3">送信</button>
+                        <button type="submit" class=" btn btn-success mt-3" onclick="value()">送信</button>
 
                     </form>
                 </div>
@@ -333,9 +408,85 @@
     <footer>
         <div class="footer-flex">
             <div class="footer-link">
-                <div class="footer-link"><a href="#" class="text-decoration-none text-light ">連絡先</a></div>
-                <div class="footer-link"><a href="#" class="text-decoration-none text-light ">ニュース</a></div>
-                <div class="footer-link"><a href="#" class="text-decoration-none text-light ">チーム情報</a></div>
+                <div class="footer-link"><a onclick="myModal" class="text-decoration-none text-light "
+                        data-bs-toggle="modal" data-bs-target="#myModal">連絡先</a></div>
+                <div class="modal" id="myModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <!-- 模态框头部 -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">連絡先</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+
+                            <!-- 模态框内容 -->
+                            <div class="modal-body">
+                                <p>作者：2200456@ecc.ac.jp</p>
+                                <p>メールの形式で送ってください。</p>
+                            </div>
+
+                            <!-- 模态框底部 -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">閉じる</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-link"><a onclick="myModal1" class="text-decoration-none text-light "
+                        data-bs-toggle="modal" data-bs-target="#myModal1">ニュース</a></div>
+                <div class="modal" id="myModal1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <!-- 模态框头部 -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">ニュース</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+
+                            <!-- 模态框内容 -->
+                            <div class="modal-body">
+                                新しいニュースがございません!
+                            </div>
+
+                            <!-- 模态框底部 -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">閉じる</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-link"><a onclick="myModal2" class="text-decoration-none text-light"
+                        data-bs-toggle="modal" data-bs-target="#myModal2">チーム情報</a></div>
+                <div class="modal" id="myModal2">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <!-- 模态框头部 -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">チーム情報</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+
+                            <!-- 模态框内容 -->
+                            <div class="modal-body">
+                                　<p>チーム：Godzilla</p>
+                                <p>制作者:ワンカンショウ,エドワードオーウェン,トゥムルウイルス</p>
+                                <p>使用言語:Python,javaScript,bootstrap5,CSS,Flask</p>
+                                <p>制作内容:FXのシミレーションするプログラミング</p>
+                            </div>
+
+                            <!-- 模态框底部 -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">閉じる</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="footer-copyrigth">Copyright ©2021</div>
         </div>

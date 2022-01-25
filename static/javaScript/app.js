@@ -22,7 +22,7 @@ function topMenu(page) {
 }
 
 function strategy_result() {
-  document.getElementById("sResult").style.display = "block";
+  document.getElementById("section-chart").style.display = "block";
 }
 
 // top menu text
@@ -45,9 +45,10 @@ function riskResetValue() {
 function changeLanguage(ln) {
   var language = 1;
   if (language === ln) {
-    document.getElementById("normal").innerHTML = "通常用";
-    document.getElementById("normal").style.color = "white";
-    document.getElementById("expert").innerHTML = "専門用";
+    // document.getElementById("normal").innerHTML = "通常用";
+    // document.getElementById("normal").style.color = "white";
+    document.getElementById("expert").innerHTML = "ログイン";
+    document.getElementById("home").innerHTML = "ホーム";
     document.getElementById("strategy-menu").innerHTML = "ストラテジー";
     document.getElementById("risk-manage").innerHTML = "リスク管理";
     document.getElementById("mrkt").innerHTML = "マーケット";
@@ -57,10 +58,11 @@ function changeLanguage(ln) {
       "ゴジラ トレード ストラテジー";
     document.getElementById("strategy-text").innerHTML = "貿易戦略を楽しむ";
   } else {
-    document.getElementById("normal").innerHTML = "NORMAL MODE";
-    document.getElementById("normal").style.color = "white";
-    document.getElementById("expert").innerHTML = "EXPERT MODE";
+    // document.getElementById("normal").innerHTML = "NORMAL MODE";
+    // document.getElementById("normal").style.color = "white";
+    document.getElementById("expert").innerHTML = "Log In";
     document.getElementById("strategy-menu").innerHTML = "STRATEGY";
+    document.getElementById("home").innerHTML = "HOME";
     document.getElementById("risk-manage").innerHTML = "RISK MANAGEMENT";
     document.getElementById("mrkt").innerHTML = "MARKET";
     document.getElementById("slctStr").innerHTML = "STRATEGY SELECT";

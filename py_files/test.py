@@ -35,7 +35,7 @@
 
 #     print(fun1.var)
 
-from SubTest import SubTest
+# from SubTest import SubTest
 
 # Instance of Class Main
 # Object = SubTest()
@@ -49,3 +49,23 @@ from SubTest import SubTest
 # ccc = cerebro
 # print("a1 " + str(a1))
 # print("aaaaaa " + str(aaa))
+
+class Val:
+
+    def __init__(self):
+        self.a = Val.val
+
+    def val(self, num):
+        self.b = num
+        return self.b
+
+
+class Calc:
+    def cal(self):
+        aa = 10
+        bb = Val().a
+        cc = aa + bb
+        print("sum: " + cc)
+
+
+Val().val(10)

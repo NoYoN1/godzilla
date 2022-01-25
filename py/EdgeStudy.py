@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 Trading Strategy Edge Simulator
 
 1. Simulates trades based on RPT and Edge.
-
 """
 
 

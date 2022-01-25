@@ -25,7 +25,7 @@
     <div id="risk-management" class="risk-management">
         <div class="top">
             <div class="top-left">
-                <a href="http://127.0.0.1:5550/">
+                <a href="{{ url_for('index') }}">
                     <button class="learn-more">
                         <span class="circle" aria-hidden="true">
                             <span class="icon arrow"></span>
@@ -57,7 +57,7 @@
                             <div id="initialCash" class="form-text">Recommendation range 100-10000 $.</div>
                         </div>
                         <div class="mb-3">
-                            <label for="tradesRequired" class=" form-label">Trades required:</label>
+                            <label for="tradesRequired" class="form-label">Trades required:</label>
                             <select class="form-select" id="tradesRequired" name="tradesRequired">
                                 <option>{{tradesRequired}}</option>
                                 <option>100</option>
@@ -78,7 +78,7 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="profitRatio" class=" form-label">Profit Ratio: </label>
+                            <label for="profitRatio" class=" form-label">Profit Loss Ratio: </label>
                             <input class="form-control" id="profitRatio" name="profitRatio"
                                 aria-describedby="profitRatio" value="{{profitRatio}}">
                             <div id="winRatio" class="form-text">2 = 2:1 Profit Ratio</div>

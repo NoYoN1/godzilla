@@ -11,8 +11,71 @@ body {
   /* position: relative; */
   /* min-height: 500px; */
 }
+.myLinkText {
+  text-decoration: none;
+}
 
-.mytextnavbar {
-  /* font-weight: bold; */
-  /* color: aliceblue; */
+.strategy {
+  margin-top: 20px;
+}
+
+.column {
+  display: flex;
+  justify-content: space-between;
+}
+.column1 {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* ####################strategy result#################### */
+.section-chart {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  min-height: 900px;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: none;
+}
+
+.chart-title {
+  text-align: center;
+  padding-top: 20px;
+  margin-bottom: 20px;
+  color: rgb(9, 9, 9);
+  font-size: 30px;
+  font-weight: bolder;
+  text-shadow: 1px 1px 2px #505050;
+}
+.chart {
+  /* position: relative; */
+  justify-content: center;
+}
+
+.rChart {
+  padding-bottom: 50px;
+  margin-left: 150px;
+  margin-right: auto;
+  width: 90%;
+}
+.strategeResultFlexTitle {
+  display: flex;
+  width: 60%;
+  color: #646464;
+}
+.strategeResultFlex {
+  display: flex;
+  width: 60%;
+}
+.sResult {
+  display: block;
+  margin-left: 50px;
+  padding-bottom: 50px;
+  font-weight: bolder;
+  align-items: center;
+}
+.item {
+  margin: auto;
 }

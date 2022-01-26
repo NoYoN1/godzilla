@@ -49,110 +49,130 @@
             <!-- start select box -->
             <div class="strategy-select-box">
                 <div class="container  mb-3 ">
-                    <form action="{{url_for('paid_strategy')}}" method="post"">
+                    <form action="{{url_for('paid_strategy')}}" method="post">
                         <div class=" mb-3">
-                        <label for="selectData" class=" form-label" id="selectDataText">データ選択</label>
-                        <select class="form-select" id="selectData" name="selectData">
-                            <option>EURUSD_D1</option>
-                            <option disabled>EURJPY_D1</option>
-                            <option disabled>EURJPY_H1</option>
-                        </select>
-                        <label for="tradesRequired" class=" form-label" id="slctStr">ストラテジー選択</label>
-                        <select class="form-select" id="tradesRequired" name="tradesRequired">
-                            <option>DojiSRSI</option>
-                            <option value="FxMA_Crossover" disabled>FxMA_Crossover</option>
-                        </select>
-                        <hr>
-                        <div>
-                            <div class="column">
-                                <div class="1">
-                                    <div class=" mb-3">
-                                        <!-- ############## -->
-                                        {% if clicked != True %}
-                                        <script>
-                                            function values() {
-                                                document.getElementById("initialCash").value = "10000";
-                                                document.getElementById("riskPerTrade").value = "0.01";
-                                                document.getElementById("dojiValue").value = "20";
-                                                document.getElementById("RSIvalueUpper").value = "0.8";
-                                                document.getElementById("RSIvalueLower").value = "0.2";
-                                                document.getElementById("StopLossATR").value = "2";
-                                                document.getElementById("TakeProfitATR").value = "4";
-                                            }
-                                        </script>
-                                        {%endif%}
-                                        <!-- ############# -->
-                                        <label for="initialCash" class="form-label  ">Initial
-                                            cash:<span class="form-text">初期金</span>
-                                        </label>
-                                        <input class="form-control" id="initialCash" name="initialCash"
-                                            aria-describedby="initialCash" value="{{initialCash}}">
-                                        <div id="initialCashText" class="form-text">Recommendation range 100-10000
-                                            $.
+                            <label for="selectData" class=" form-label" id="selectDataText">データ選択</label>
+                            <select class="form-select" id="selectData" name="selectData">
+                                <option id="0">EURUSD_D1</option>
+                                <option id="1">EURJPY_D1</option>
+                                <option id="2" disabled>EURJPY_H1</option>
+                            </select>
+                            <!-- select data -->
+                            <script>
+                                var x = document.getElementById("selectData").selectedIndex;
+                                if (x === 0) {
+                                    document.getElementById("rsi").style.display = "block"
+                                    document.getElementById("ma").style.display = "none"
+                                } else if (x === 1) {
+                                    document.getElementById("ma").style.display = "block"
+                                    document.getElementById("rsi").style.display = "none"
+                                }
+                            </script>
+                            <!-- select data -->
+                            <label for="tradesRequired" class=" form-label" id="slctStr">ストラテジー選択</label>
+                            <select class="form-select" id="tradesRequired" name="tradesRequired">
+                                <option>DojiSRSI</option>
+                                <option value="FxMA_Crossover" disabled>FxMA_Crossover</option>
+                            </select>
+                            <hr>
+                            <div>
+                                <!-- start rsi -->
+                                <div id="sri">
+                                    <div class="column">
+                                        <div class="1">
+                                            <div class=" mb-3">
+                                                <!-- ############## -->
+                                                {% if clicked != True %}
+                                                <script>
+                                                    function values() {
+                                                        document.getElementById("initialCash").value = "10000";
+                                                        document.getElementById("riskPerTrade").value = "0.01";
+                                                        document.getElementById("dojiValue").value = "20";
+                                                        document.getElementById("RSIvalueUpper").value = "0.8";
+                                                        document.getElementById("RSIvalueLower").value = "0.2";
+                                                        document.getElementById("StopLossATR").value = "2";
+                                                        document.getElementById("TakeProfitATR").value = "4";
+                                                    }
+                                                </script>
+                                                {%endif%}
+                                                <!-- ############# -->
+                                                <label for="initialCash" class="form-label  ">Initial
+                                                    cash:<span class="form-text">初期金</span>
+                                                </label>
+                                                <input class="form-control" id="initialCash" name="initialCash"
+                                                    aria-describedby="initialCash" value="{{initialCash}}">
+                                                <div id="initialCashText" class="form-text">Recommendation range
+                                                    100-10000
+                                                    $.
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="riskPerTrade" class=" form-label">Risk per Trade: </label>
+                                                <input class="form-control" id="riskPerTrade" name="riskPerTrade"
+                                                    aria-describedby="riskPerTrade" value="{{riskPerTrade}}">
+                                                <div id="riskPerTrade" class="form-text">Recommendation range 1-5%. 0.01
+                                                    =
+                                                    1%
+                                                    Risk
+                                                    per
+                                                    Trade
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="riskPerTrade" class=" form-label">Risk per Trade: </label>
-                                        <input class="form-control" id="riskPerTrade" name="riskPerTrade"
-                                            aria-describedby="riskPerTrade" value="{{riskPerTrade}}">
-                                        <div id="riskPerTrade" class="form-text">Recommendation range 1-5%. 0.01 =
-                                            1%
-                                            Risk
-                                            per
-                                            Trade
+                                        <div class="1">
+                                            <div class="mb-3">
+                                                <label for="dojiValue" class="form-label">Doji Value: </label>
+                                                <input class="form-control" id="dojiValue" name="dojiValue"
+                                                    aria-describedby="dojiValue" value="{{dojiValue}}">
+                                                <div id="dojiValue" class="form-text">
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="RSIvalueUpper" class=" form-label">RSIvalueUpper: </label>
+                                                <input class="form-control" id="RSIvalueUpper" name="RSIvalueUpper"
+                                                    aria-describedby="RSIvalueUpper" value="{{RSIvalueUpper}}">
+                                                <div id="RSIvalueUpper" class="form-text">
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="RSIvalueLower" class=" form-label">RSIvalueLower: </label>
+                                                <input class="form-control" id="RSIvalueLower" name="RSIvalueLower"
+                                                    aria-describedby="RSIvalueLower" value="{{RSIvalueLower}}">
+                                                <div id="RSIvalueLower" class="form-text">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="1">
+                                            <div class="mb-3">
+                                                <label for="StopLossATR" class=" form-label">StopLossATR: </label>
+                                                <input class="form-control" id="StopLossATR" name="StopLossATR"
+                                                    aria-describedby="StopLossATR" value="{{StopLossATR}}">
+                                                <div id="winRatio" class="form-text"></div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="TakeProfitATR" class=" form-label">TakeProfitATR: </label>
+                                                <input class="form-control" id="TakeProfitATR" name="TakeProfitATR"
+                                                    aria-describedby="TakeProfitATR" value="{{TakeProfitATR}}">
+                                                <div id="winRatio" class="form-text"></div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="moreOption" class=" form-label">More Option: </label>
+                                                <input class="form-control" id="moreOption" name="moreOption"
+                                                    aria-describedby="moreOption" value="More Option" disabled>
+                                                <div id="winRatio" class="form-text"></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="1">
-                                    <div class="mb-3">
-                                        <label for="dojiValue" class="form-label">Doji Value: </label>
-                                        <input class="form-control" id="dojiValue" name="dojiValue"
-                                            aria-describedby="dojiValue" value="{{dojiValue}}">
-                                        <div id="dojiValue" class="form-text">
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="RSIvalueUpper" class=" form-label">RSIvalueUpper: </label>
-                                        <input class="form-control" id="RSIvalueUpper" name="RSIvalueUpper"
-                                            aria-describedby="RSIvalueUpper" value="{{RSIvalueUpper}}">
-                                        <div id="RSIvalueUpper" class="form-text">
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="RSIvalueLower" class=" form-label">RSIvalueLower: </label>
-                                        <input class="form-control" id="RSIvalueLower" name="RSIvalueLower"
-                                            aria-describedby="RSIvalueLower" value="{{RSIvalueLower}}">
-                                        <div id="RSIvalueLower" class="form-text">
-                                        </div>
-                                    </div>
+                                <!-- end rsi -->
 
-                                </div>
-                                <div class="1">
-                                    <div class="mb-3">
-                                        <label for="StopLossATR" class=" form-label">StopLossATR: </label>
-                                        <input class="form-control" id="StopLossATR" name="StopLossATR"
-                                            aria-describedby="StopLossATR" value="{{StopLossATR}}">
-                                        <div id="winRatio" class="form-text"></div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="TakeProfitATR" class=" form-label">TakeProfitATR: </label>
-                                        <input class="form-control" id="TakeProfitATR" name="TakeProfitATR"
-                                            aria-describedby="TakeProfitATR" value="{{TakeProfitATR}}">
-                                        <div id="winRatio" class="form-text"></div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="moreOption" class=" form-label">More Option: </label>
-                                        <input class="form-control" id="moreOption" name="moreOption"
-                                            aria-describedby="moreOption" value="More Option" disabled>
-                                        <div id="winRatio" class="form-text"></div>
-                                    </div>
-                                </div>
+
+
                             </div>
-                        </div>
-                        <button type="submit" class="btn btn-success mt-3 my-btn"
-                            onclick="result_data()">Submit</button>
-                        <br>
-                        <br>
+                            <button type="submit" class="btn btn-success mt-3 my-btn"
+                                onclick="result_data()">Submit</button>
+                            <br>
+                            <br>
                     </form>
                 </div>
             </div>
@@ -185,47 +205,31 @@
             <div id="chart" class="rChart"></div>
             <div id="sResult" class="sResult">
 
-                <p>Starting Portfolio Value: {{setCash}}</p>
+                <p>Starting Portfolio Value: {{initialCash}}</p>
                 <div class="strategeResultFlexTitle">
-                    <div class="item">Total Open</div>
-                    <div class="item">Total Closed</div>
-                    <div class="item">Total Won</div>
-                    <div class="item">Total Lost</div>
+                    <div class="item">Total Open: {{final_result[2]}}</div>
+                    <div class="item">Total Closed: {{final_result[3]}}</div>
+                    <div class="item">Total Won: {{final_result[4]}}</div>
+                    <div class="item">Total Lost: {{final_result[5]}}</div>
                 </div>
 
-
                 <div class="strategeResultFlexTitle">
-                    <div class="item">Strike Rate</div>
-                    <div class="item">Win Streak</div>
-                    <div class="item">Losing Streak</div>
-                    <div class="item">PnL Net</div>
+                    <div class="item">Strike Rate: {{final_result[9]}}</div>
+                    <div class="item">Win Streak: {{final_result[6]}}</div>
+                    <div class="item">Losing Streak: {{final_result[5]}}</div>
+                    <div class="item">PnL Net: {{final_result[10]}}</div>
+
                 </div>
 
-                <p style="margin-top: 20px;">Final Portfolio Value: </p>
-                <p>Final Portfolio Cash : </p>
+                <p style="margin-top: 20px;">Final Portfolio Value : {{final_result[0]}}</p>
+                <p>Final Portfolio Cash : {{final_result[1]}}</p>
+
             </div>
         </div>
         <!-- strategy result start -->
         <!-- {% if check %} -->
 
-        <div class="strategeResultFlex">
-            {%for i in range(0, 4)%}
-            <div class="item">{{finalResult[0][i]}}</div>
-            {%endfor%}
-        </div>
-        <div class="strategeResultFlexTitle">
-            <div class="item">Strike Rate</div>
-            <div class="item">Win Streak</div>
-            <div class="item">Losing Streak</div>
-            <div class="item">PnL Net</div>
-        </div>
-        <div class="strategeResultFlex">
-            {%for i in range(0, 4)%}
-            <div class="item">{{finalResult[1][i]}}</div>
-            {%endfor%}
-        </div>
-        <p style="margin-top: 20px;">Final Portfolio Value: {{'%.2f'%finalValue}}</p>
-        <p>Final Portfolio Cash : {{'%.2f'%finalCash}}</p>
+
     </div>
     <!-- {% endif %} -->
     <!-- strategy result end -->

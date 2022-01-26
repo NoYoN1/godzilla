@@ -6,8 +6,12 @@
 # 卒業作品
 # TUMUR UILS
 
+from mimetypes import init
+from msilib.schema import EventMapping
 from pickle import TRUE
 from pydoc import cli
+from tarfile import TarInfo
+import threading
 from xmlrpc.client import boolean
 import click
 from flask import Flask, url_for, redirect, request, render_template, session
@@ -45,6 +49,17 @@ person = {"is_logged_in": False, "name": "", "email": "", "uid": ""}
 
 show_result_Data = {0: 0}
 show_result_data_paid = {0: 0}
+
+initialCash = 10000
+riskPerTrade = 0.01
+StopLossATR = 2
+TakeProfitATR = 4
+dojiValue = 20
+RSIvalueUpper = 0.8
+RSIvalueLower = 0.2
+result = FxDoji_SRSI_1.Simulate(initialCash, riskPerTrade, StopLossATR, TakeProfitATR,
+                                dojiValue, RSIvalueUpper, RSIvalueLower)
+final_result = result.printFinal()
 
 
 @app.route('/', methods=["GET", "POST"])
@@ -132,7 +147,12 @@ def riskmanagement():
             file.write(js)
             file.close()
 
-        return (render_template('/risk/risk.html', title=title, initialCash=initialCash, tradesRequired=tradesRequired, riskPerTrade=riskPerTrade, profitRatio=profitRatio, winRatio=winRatio, final_result=final_result, chartData=chartData, dataRequired=dataRequired, finalCashMulti=finalCashMulti, finalMaxDDMulti=finalMaxDDMulti, fnLNetMulti=fnLNetMulti, StrikeRateMulti=StrikeRateMulti))
+        return (render_template('/risk/risk.html',
+                                title=title, initialCash=initialCash, tradesRequired=tradesRequired,
+                                riskPerTrade=riskPerTrade, profitRatio=profitRatio, winRatio=winRatio,
+                                final_result=final_result, chartData=chartData, dataRequired=dataRequired,
+                                finalCashMulti=finalCashMulti, finalMaxDDMulti=finalMaxDDMulti, fnLNetMulti=fnLNetMulti,
+                                StrikeRateMulti=StrikeRateMulti))
     return render_template('/index.html',)
 
 
@@ -142,7 +162,7 @@ def chart_html():
     return (render_template('/risk/chart.html', ))
 
 
-##########################################
+####################################################################################
 
 
 @app.route("/login")
@@ -168,13 +188,16 @@ def signup():
 
 @app.route("/welcome")
 def welcome():
+
     show_result_data_paid = {0: 0}
     jsr = json.dumps(show_result_data_paid)
     file = open('static/json/show_result_data_paid.json', 'w')
     file.write(jsr)
     file.close()
+
     if person["is_logged_in"] == True:
-        return render_template("/expert/expert.html", email=person["email"], name=person["name"])
+
+        return render_template("/expert/expert.html", email=person["email"], name=person["name"], final_result=final_result)
     else:
         return redirect(url_for('login'))
 
@@ -233,6 +256,7 @@ def register():
             return redirect(url_for('signup'))
         else:
             return redirect(url_for('index'))
+####################################################################################
 
 
 @app.route("/e_strategy", methods=["POST", "GET"])
@@ -249,36 +273,37 @@ def paid_strategy():
         RSIvalueUpper = request.form.get("RSIvalueUpper", type=float)
         RSIvalueLower = request.form.get("RSIvalueLower", type=float)
 
+        ma20Value = request.form.get("ma20Value", type=float)
+        ma50Value = request.form.get("ma50Value", type=float)
+
         StopLossATR = request.form.get("StopLossATR", type=float)
         TakeProfitATR = request.form.get("TakeProfitATR", type=float)
     else:
         clicked = False
         # temp2.Simulate(initialCash)
-    FxDoji_SRSI_1.Simulate(initialCash, riskPerTrade, StopLossATR, TakeProfitATR,
-                           dojiValue, RSIvalueUpper, RSIvalueLower)
-    strategy_result = FxDoji_SRSI_1.Simulate
-    # firstStrat = strategy_result.firstStrat
-    # analyzer = firstStrat.analyzers.ta.get_analysis()
-    # finalResult = strategy_result.printTradeAnalysis(analyzer)
-    setCash = strategy_result
-    # finalValue = strategy_result.finalValue
-    # finalCash = strategy_result.finalCash
+    result = FxDoji_SRSI_1.Simulate(initialCash, riskPerTrade, StopLossATR, TakeProfitATR,
+                                    dojiValue, RSIvalueUpper, RSIvalueLower)
+
+    final_result = result.printFinal()
 
     show_result_data_paid = {0: 1}
     jsr = json.dumps(show_result_data_paid)
     file = open('static/json/show_result_data_paid.json', 'w')
     file.write(jsr)
     file.close()
-    return render_template("expert/expert.html", clicked=clicked, initialCash=initialCash, TakeProfitATR=TakeProfitATR, StopLossATR=StopLossATR, riskPerTrade=riskPerTrade, dojiValue=dojiValue, RSIvalueUpper=RSIvalueUpper, RSIvalueLower=RSIvalueLower, email=person["email"], name=person["name"])
+    return render_template("/expert/expert.html",
+                           clicked=clicked, initialCash=initialCash, TakeProfitATR=TakeProfitATR,
+                           StopLossATR=StopLossATR, riskPerTrade=riskPerTrade, dojiValue=dojiValue,
+                           RSIvalueUpper=RSIvalueUpper, RSIvalueLower=RSIvalueLower,
+                           final_result=final_result)
 
 
 @app.route("/strategy1")
 def strategy():
     return render_template("strategy/strategy.html")
-
-# strategy(check, finalResult, setCash, finalValue, finalCash)
-# check, finalResult, setCash, finalValue, finalCash
-# finalResult=finalResult, setCash=setCash, finalValue=finalValue, finalCash=finalCash, check=check
+    # strategy(check, finalResult, setCash, finalValue, finalCash)
+    # check, finalResult, setCash, finalValue, finalCash
+    # finalResult=finalResult, setCash=setCash, finalValue=finalValue, finalCash=finalCash, check=check
 
 
 @app.route("/strategy", methods=["POST", "GET"])

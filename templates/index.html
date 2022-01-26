@@ -85,14 +85,23 @@
                                         <select class="form-select" id="selectData" name="selectData">
                                             <option>EURUSD_D1</option>
                                             <option disabled>EURJPY_D1</option>
-                                            <option disabled>EURJPY_H1</option>
+                                            <option disabled>USDJPY_D1</option>
+                                            <option disabled>EURGBP_D1</option>
+                                            <option disabled>GBPUSD_D1</option>
+                                            <option disabled>EURGB{_D1</option>
+                                            <option disabled>XAUUSD_D1</option>
                                         </select>
 
                                         <label for="selectStrategy" class=" form-label"
                                             id="selectStrategy">ストラテジー選択</label>
                                         <select class="form-select" id="selectStrategy" name="selectStrategy">
                                             <option>DojiSRSI</option>
-                                            <option disabled>FxMA_Crossover</option>
+                                            <option>FxMA_Crossover</option>
+                                            <option>FxMA_MACD</option>
+                                            <option>FxMACD_BollingerBands</option>
+                                            <option>FxBB_RSI</option>
+                                            <option>FxPatterns</option>
+                                            <option>FxWaves</option>
                                         </select>
 
                                         <button id="btn" type="submit" class="btn btn-success mt-3 my-btn"
@@ -260,11 +269,9 @@
 
         <!--  margets start  -->
         <div id="margets" class="margets">
-            <div>
-                <h2>マーケット</h2>
-                {{c}}
-                <button type="submit" onclick="coino(a)">COIN</button>
-            </div>
+            <h2>マーケット</h2>
+            <div id="market" class="market"></div>
+
         </div>
         <!--  margets end  -->
     </main>
@@ -475,7 +482,7 @@
                             <div class="modal-body">
                                 　<p>チーム：Godzilla</p>
                                 <p>制作者:ワンカンショウ,エドワードオーウェン,トゥムルウイルス</p>
-                                <p>使用言語:Python,javaScript,bootstrap5,CSS,Flask</p>
+                                <p>使用言語:Python,javaScript,bootstrap5,CSS,Flask,Firebase</p>
                                 <p>制作内容:FXのシミレーションするプログラミング</p>
                             </div>
 
@@ -492,6 +499,7 @@
         </div>
     </footer>
     <script src="/static/javaScript/chart.js"></script>
+    <script src="/static/javaScript/coin.js"></script>
 </body>
 
 </html>

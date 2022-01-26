@@ -267,12 +267,24 @@ footer a:hover {
 .risk-management-right-img:hover {
   opacity: 0.5;
 }
+.market {
+  text-align: center;
+
+  justify-items: center;
+}
+
+table {
+  margin-left: auto;
+  margin-right: auto;
+}
 .margets {
   display: none;
   background-position: center;
   background-repeat: no-repeat;
   padding-top: 30px;
-  height: 500px;
+  min-height: 500px;
+  background-image: url("../img/image/white_bg.jpg");
+  background-size: cover;
   background-color: #ff0606;
   text-align: center;
   font-weight: bolder;

@@ -59,17 +59,6 @@ This strategy utilizes Stoch RSI and DOJI patterns to trade reversals.
 '''
 
 
-class Plotter(plt.Plot):
-
-    def __init__(self):
-        super().__init__(volup='#60cc73')  # custom color for volume up bars
-
-    def show(self):
-        mng = self.mpyplot.get_current_fig_manager()
-        mng.window.state('zoomed')
-        self.mpyplot.show()
-        # self.mpld3.show()
-
 
 def printTradeAnalysis(analyzer):
     """
@@ -101,13 +90,9 @@ def printTradeAnalysis(analyzer):
     for row in print_list:
         print(row_format.format('', *row))
     return (r1, r2)
-
-
 def printSQN(analyzer):
     sqn = round(analyzer.sqn, 2)
     print('SQN: {}'.format(sqn))
-
-
 def longSizing(cash, entryprice, stoploss, RPT):
     rpt = RPT  # 0.01 = 1% risk per trade
     rptic = cash * rpt  # RPT in CASH.
@@ -116,8 +101,6 @@ def longSizing(cash, entryprice, stoploss, RPT):
     entryic = rptic / slgap  # Entry ni Cash = $100 / SLGap
     qty = math.floor(entryic / entryprice)
     return qty  # Returns number of Shares/Contracts to buy/sell
-
-
 def shortSizing(cash, entryprice, stoploss, RPT):
     rpt = RPT  # 0.01 = 1% risk per trade
     rptic = cash * rpt  # RPT in CASH.
@@ -125,24 +108,14 @@ def shortSizing(cash, entryprice, stoploss, RPT):
     entryic = rptic / slgap  # Entry in Cash = $100 / SLGap
     qty = math.floor(entryic / entryprice)
     return qty  # Returns number of Shares/Contracts to buy/sell
-
-
 def longStopLoss(atr, close0, SLATR):
     return close0 - (atr * SLATR)
-
-
 def longTakeProfit(atr, close0, TPATR):
     return close0 + (atr * TPATR)
-
-
 def shortStopLoss(atr, close0, SLATR):
     return close0 + (atr * SLATR)
-
-
 def shortTakeProfit(atr, close0, TPATR):
     return close0 - (atr * TPATR)
-
-
 def doji(open0, high0, low0, close0, dojiValue):
     if close0 > open0:  # GREEN BAR
         if close0 - open0 <= (
@@ -152,7 +125,6 @@ def doji(open0, high0, low0, close0, dojiValue):
         if open0 - close0 <= (
                 (high0 - open0) + (close0 - low0)) / dojiValue:  # Body < (Top Wick + Bot Wick) / 20
             return True
-
 
 class Simulate:
     def __init__(self, cash, RPT, SLATR, TPATR, dojiValue, rsiValueUpper, rsiValueLower):
@@ -192,16 +164,40 @@ class Simulate:
         print("Starting Portfolio Value :%.5f" %
               (self.cerebro.broker.getvalue()))
         strategies = self.cerebro.run()  # run it all
-        firstStrat = strategies[0]
+        self.firstStrat = strategies[0]
         finalValue = self.cerebro.broker.getvalue()
         finalCash = self.cerebro.broker.getcash()
         print("Final Portfolio Value:%.5f" % (self.cerebro.broker.getvalue()))
         print("Final Portfolio Cash :%.5f" % (self.cerebro.broker.getcash()))
 
-        printTradeAnalysis(firstStrat.analyzers.ta.get_analysis())
-        printSQN(firstStrat.analyzers.sqn.get_analysis())
+        printTradeAnalysis(self.firstStrat.analyzers.ta.get_analysis())
+        printSQN(self.firstStrat.analyzers.sqn.get_analysis())
         # self.cerebro.plot(style="candlestick", barup='tan',
         #                   bardown='darkslategrey')
+
+    def printFinal(self):
+
+        print("Final Portfolio Value:%.5f" % (self.cerebro.broker.getvalue()))
+        print("Final Portfolio Cash :%.5f" % (self.cerebro.broker.getcash()))
+
+        printTradeAnalysis(self.firstStrat.analyzers.ta.get_analysis())
+        printSQN(self.firstStrat.analyzers.sqn.get_analysis())
+
+        getValue = self.cerebro.broker.getvalue()
+        getCash  = self.cerebro.broker.getcash()
+        getTotalOpen = self.firstStrat.analyzers.ta.get_analysis().total.open
+        getTotalClosed = self.firstStrat.analyzers.ta.get_analysis().total.closed
+        getTotalWon = self.firstStrat.analyzers.ta.get_analysis().won.total
+
+        getTotalLost = self.firstStrat.analyzers.ta.get_analysis().lost.total
+        getWinStreak = self.firstStrat.analyzers.ta.get_analysis().streak.won.longest
+        getLoseStreak = self.firstStrat.analyzers.ta.get_analysis().streak.lost.longest
+        getPNLNET = round(self.firstStrat.analyzers.ta.get_analysis().pnl.net.total, 2)
+        getStrikeRate = round((getTotalWon / getTotalClosed) * 100, 2)
+
+        return (getValue, getCash, getTotalOpen, getTotalClosed, getTotalWon,
+                getTotalLost, getWinStreak, getLoseStreak, getPNLNET, getStrikeRate,
+                getPNLNET)
 
 
 class FxMain(bt.Strategy):
@@ -432,7 +428,7 @@ class FxMain(bt.Strategy):
         print(Fore.RESET)
 
 
-# Simulate(10000, 0.01, 2, 4,
-#          20, 0.8, 0.2)
+Simulate(10000, 0.01, 2, 4,
+          20, 0.8, 0.2)
 # Simulate(cash, RPT, SLATR, TPATR,
 #         v1, v2, v3, v4, v5)

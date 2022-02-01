@@ -6,17 +6,8 @@
 # 卒業作品
 # TUMUR UILS
 
-from mimetypes import init
-from msilib.schema import EventMapping
-from pickle import TRUE
-from pydoc import cli
-from tarfile import TarInfo
-import threading
-from xmlrpc.client import boolean
-import click
 from flask import Flask, url_for, redirect, request, render_template, session
 import pandas as pd
-import numpy as np
 from pandas.io import json
 import py_files.web_data
 # import py.coin1 as coin

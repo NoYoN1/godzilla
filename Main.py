@@ -4,6 +4,8 @@
 # Godzilla trade strategy
 # team G
 # 卒業作品
+# EDWARD OWEN
+# 王 冠樟
 # TUMUR UILS
 
 from mimetypes import init

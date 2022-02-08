@@ -288,7 +288,7 @@ def paid_strategy():
                            clicked=clicked, initialCash=initialCash, TakeProfitATR=TakeProfitATR,
                            StopLossATR=StopLossATR, riskPerTrade=riskPerTrade, dojiValue=dojiValue,
                            RSIvalueUpper=RSIvalueUpper, RSIvalueLower=RSIvalueLower,
-                           final_result=final_result)
+                           final_result=final_result, email=person["email"], name=person["name"])
 
 
 @app.route("/strategy1")

@@ -96,12 +96,12 @@
                                             id="selectStrategy">ストラテジー選択</label>
                                         <select class="form-select" id="selectStrategy" name="selectStrategy">
                                             <option>DojiSRSI</option>
-                                            <option>FxMA_Crossover</option>
-                                            <option>FxMA_MACD</option>
-                                            <option>FxMACD_BollingerBands</option>
-                                            <option>FxBB_RSI</option>
-                                            <option>FxPatterns</option>
-                                            <option>FxWaves</option>
+                                            <option disabled>FxMA_Crossover</option>
+                                            <option disabled>FxMA_MACD</option>
+                                            <option disabled>FxMACD_BollingerBands</option>
+                                            <option disabled>FxBB_RSI</option>
+                                            <option disabled>FxPatterns</option>
+                                            <option disabled>FxWaves</option>
                                         </select>
 
                                         <button id="btn" type="submit" class="btn btn-success mt-3 my-btn"
@@ -270,8 +270,9 @@
         <!--  margets start  -->
         <div id="margets" class="margets">
             <h2>マーケット</h2>
-            <div id="market" class="market"></div>
-
+            <div>
+                <div id="market" class="market"></div>
+            </div>
         </div>
         <!--  margets end  -->
     </main>

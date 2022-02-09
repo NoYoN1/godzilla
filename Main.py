@@ -8,16 +8,18 @@
 # 王 冠樟
 # TUMUR UILS
 
+# pip install Flask
 from flask import Flask, url_for, redirect, request, render_template, session
+# pip install pandas
 import pandas as pd
 from pandas.io import json
 import py_files.web_data
 # import py.coin1 as coin
+# pip install backtrader
 import backtrader as bt
 import py.EdgeStudy as EdgeStudy
 import strategy.FxDoji_SRSI_1 as FxDoji_SRSI_1
 import strategy.FxMA_Crossover as MA
-
 import strategy.FxDojiSRSI as FxDojiSRSI
 # pip install pyrebase4
 import pyrebase

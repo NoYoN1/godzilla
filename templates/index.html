@@ -81,10 +81,11 @@
                             <div class="container  mt-3 ">
                                 <form action="{{url_for('normal_strategy_result')}}" method="post">
                                     <div class="mb-3">
-                                        <label for="selectData" class=" form-label" id="selectDataText">データ選択</label>
-                                        <select class="form-select" id="selectData" name="selectData">
+                                        <label for="selectDataText" class=" form-label"
+                                            id="selectDataText">データ選択</label>
+                                        <select id="selectData" class="form-select" name="selectData">
                                             <option>EURUSD_D1</option>
-                                            <option disabled>EURJPY_D1</option>
+                                            <option>EURJPY_D1</option>
                                             <option disabled>USDJPY_D1</option>
                                             <option disabled>EURGBP_D1</option>
                                             <option disabled>GBPUSD_D1</option>

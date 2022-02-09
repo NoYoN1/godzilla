@@ -314,10 +314,11 @@ def normal_strategy_result():
         finalCash = strategy_result.finalCash
         # strategy(check, finalResult, setCash, finalValue, finalCash)
         # Since the headers are missing in the csv file, explicitly passing the field names in the program
-        csv_file = pd.DataFrame(pd.read_csv("datas/EURUSD_D1.csv", sep=",", names=[
-                                "time", "open", "high", "low", "close", "volume"], index_col=False))
-        csv_file.to_json("static/json/EURUSD_D1.json", orient="records", date_format="epoch",
-                         double_precision=10, force_ascii=True, date_unit="ms", default_handler=None)
+
+        # csv_file = pd.DataFrame(pd.read_csv("datas/EURUSD_D1.csv", sep=",", names=[
+        # "time", "open", "high", "low", "close", "volume"], index_col=False))
+        # csv_file.to_json("static/json/EURUSD_D1.json", orient="records", date_format="epoch",
+        #  double_precision=10, force_ascii=True, date_unit="ms", default_handler=None)
         show_result_Data = {0: 1}
         jsr = json.dumps(show_result_Data)
         file = open('static/json/show_result_Data.json', 'w')

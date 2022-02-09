@@ -29,15 +29,18 @@ var series = chart.addCandlestickSeries({
   wickDownColor: "rgb(255,82,82)",
   borderVisible: false,
 });
-var selectData = document.getElementById("selectData").value;
-let fileUrl;
-if (selectData === "eurusd_d1") {
-  fileUrl = "/static/json/EURUSD_D1.json";
-} else if (selectData === "eurjpy_d1") {
-  fileUrl = "/static/json/EURJPY_D1.json";
-}
+
 const fileUrlChart = "/static/json/buysell.json";
 async function load() {
+  var selectData = document.getElementById("selectData").value;
+  console.log(selectData);
+  let fileUrl;
+  if (selectData === "EURUSD_D1") {
+    fileUrl = "static/json/EURUSD_D1.json";
+  }
+  if (selectData === "EURJPY_D1") {
+    fileUrl = "static/json/EURJPY_D1.json";
+  }
   //get local data
   const response = await fetch(fileUrl);
   const cData = await response.json();

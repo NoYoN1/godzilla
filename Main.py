@@ -179,6 +179,8 @@ def signup():
     if person["is_logged_in"] == True:
         successful = "登録完了しました。ログイン画面にログインしてください。"
         return render_template("index.html", successful=successful)
+    else:
+        return redirect(url_for("index"))
 
 
 @app.route("/welcome")

@@ -1,11 +1,11 @@
-# godzilla
+　# godzilla
 
-# 卒業作品
+　# 卒業作品
 
-# SE2A
+　# SE2A
 
-# JAPAN
+　# JAPAN
 
-# ECC 専門学校
+　# ECC コンピュータ専門学校
 
 ＃　２０２１．１１．１１

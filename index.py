@@ -333,4 +333,4 @@ def normal_strategy_result():
 
 if __name__ == '__main__':
     # app.run(host="127.0.0.1", port=5550, debug=True)
-    app.run(debug=False, host='0.0.0.0')
+    app.run(debug=False, host='0.0.0.0', port=3000)

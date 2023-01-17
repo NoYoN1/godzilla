@@ -83,9 +83,9 @@ def printTradeAnalysis(analyzer):
     else:
         header_length = len(h2)
     # Print the rows
-    print_list = [h1, r1, h2, r2]
+   # print_list = [h1, r1, h2, r2]
     row_format = "{:<15}" * (header_length + 1)
-    print("Trade Analysis Results:")
+   # print("Trade Analysis Results:")
     for row in print_list:
         print(row_format.format('', *row))
     return (r1, r2)
@@ -93,7 +93,7 @@ def printTradeAnalysis(analyzer):
 
 def printSQN(analyzer):
     sqn = round(analyzer.sqn, 2)
-    print('SQN: {}'.format(sqn))
+   # print('SQN: {}'.format(sqn))
 
 
 def longSizing(cash, entryprice, stoploss, RPT):
@@ -177,27 +177,27 @@ class Simulate:
         self.cerebro.addanalyzer(bt.analyzers.TradeAnalyzer, _name="ta")
         self.cerebro.addanalyzer(bt.analyzers.SQN, _name="sqn")
 
-        print("Starting Portfolio Value :%.5f" %
-              (self.cerebro.broker.getvalue()))
+        #print("Starting Portfolio Value :%.5f" %
+             # (self.cerebro.broker.getvalue()))
         strategies = self.cerebro.run()  # run it all
         self.firstStrat = strategies[0]
         finalValue = self.cerebro.broker.getvalue()
         finalCash = self.cerebro.broker.getcash()
-        print("Final Portfolio Value:%.5f" % (self.cerebro.broker.getvalue()))
-        print("Final Portfolio Cash :%.5f" % (self.cerebro.broker.getcash()))
+        #print("Final Portfolio Value:%.5f" % (self.cerebro.broker.getvalue()))
+        #print("Final Portfolio Cash :%.5f" % (self.cerebro.broker.getcash()))
 
-        printTradeAnalysis(self.firstStrat.analyzers.ta.get_analysis())
-        printSQN(self.firstStrat.analyzers.sqn.get_analysis())
+        #printTradeAnalysis(self.firstStrat.analyzers.ta.get_analysis())
+        #printSQN(self.firstStrat.analyzers.sqn.get_analysis())
         # self.cerebro.plot(style="candlestick", barup='tan',
         #                   bardown='darkslategrey')
 
     def printFinal(self):
 
-        print("Final Portfolio Value:%.5f" % (self.cerebro.broker.getvalue()))
-        print("Final Portfolio Cash :%.5f" % (self.cerebro.broker.getcash()))
+        #print("Final Portfolio Value:%.5f" % (self.cerebro.broker.getvalue()))
+        #print("Final Portfolio Cash :%.5f" % (self.cerebro.broker.getcash()))
 
-        printTradeAnalysis(self.firstStrat.analyzers.ta.get_analysis())
-        printSQN(self.firstStrat.analyzers.sqn.get_analysis())
+        #printTradeAnalysis(self.firstStrat.analyzers.ta.get_analysis())
+        #printSQN(self.firstStrat.analyzers.sqn.get_analysis())
 
         getValue = self.cerebro.broker.getvalue()
         getCash = self.cerebro.broker.getcash()
@@ -303,10 +303,10 @@ class FxMain(bt.Strategy):
         self.srsi = self.StochRSI()
 
     # LOGGING FUNCTION
-    def log(self, txt, dt=None):
-        """ Logging function for this strategy"""
-        dt = dt or self.datas[0].datetime.datetime(0)
-        print('%s, %s' % (dt.isoformat(), txt))
+   # def log(self, txt, dt=None):
+   #     """ Logging function for this strategy"""
+   #     dt = dt or self.datas[0].datetime.datetime(0)
+   #     print('%s, %s' % (dt.isoformat(), txt))
 
     # MAIN FUNCTION HERE
     def next(self):
@@ -431,18 +431,18 @@ class FxMain(bt.Strategy):
         cp = ((self.cerebro.broker.getcash() / self.cerebro.getInitCash())
               * 100) - 100  # Cumulative profit. 0% is the Initial Amount
 
-        if profitpercent < 0:
-            print(Fore.RED, end="")
-        elif profitpercent > 0:
-            print(Fore.GREEN, end="")
+       # if profitpercent < 0:
+       #     print(Fore.RED, end="")
+       # elif profitpercent > 0:
+       #     print(Fore.GREEN, end="")
 
-        self.log("[    OPERATION PROFIT   ] B: %.2f, GROSS: %.2f, NET: %.2f" %
-                 (self.cerebro.broker.getcash(), trade.pnl, trade.pnlcomm))
-        self.log("[                       ] G/L: %.2f Percent, Cumulative: %.2f Percent" %
-                 (profitpercent, cp))
+       # self.log("[    OPERATION PROFIT   ] B: %.2f, GROSS: %.2f, NET: %.2f" %
+       #          (self.cerebro.broker.getcash(), trade.pnl, trade.pnlcomm))
+       # self.log("[                       ] G/L: %.2f Percent, Cumulative: %.2f Percent" %
+       #          (profitpercent, cp))
 
         #self.skip = True
-        print(Fore.RESET)
+       # print(Fore.RESET)
 
 
 # Simulate(10000, 0.01, 2, 4,
